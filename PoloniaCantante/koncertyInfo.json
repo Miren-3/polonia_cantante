@@ -1,0 +1,38 @@
+{
+    "initSlide": 3,
+    "concerts": [
+        {
+            "date": "11-2025",
+            "time": "15:32",
+            "adress": "Erps",
+            "price": "6! - log2(8)",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/karta2.jpeg",
+            "ended": true
+        },
+        {
+            "date": "12-2025",
+            "time": "",
+            "adress": "Leuven",
+            "price": "",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/karta1.jpeg",
+            "ended": true
+        },
+        {
+            "date": "25-1-2026",
+            "time": "17:00",
+            "adress": "Celestijnenlaan 'nie wiem ktory numer'",
+            "price": "60.000",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/wosp26.jpeg",
+            "ended": true
+        },
+        {
+            "date": "13-6-2026",
+            "time": "??:??",
+            "adress": "Blanden, Haasrodestraat 72",
+            "price": "10",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced.jpg",
+            "ended": false
+        }
+    ],
+    "v": "1.1b"
+}

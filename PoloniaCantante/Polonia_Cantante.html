@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="pics/logoPC.png">
+    <title>Polonia Cantante</title>
+    <link rel="stylesheet" href="pol_cant.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav id="navBar"> <!--nav bar ig?-->
+            <button id="oNas" onclick="scrollToId('boxONas-outer')" class="but">O nas</button>
+            <button id="koncerty" onclick="scrollToId('boxKoncerty')" class="but">Koncerty & Bilety</button>
+            <button id="zdjecia" onclick="scrollToId('boxGaleria')" class="but">Zdjęcia</button>
+            <!--<button id="proby" onclick="scrollToId('boxProby')" class="but">Próby</button>-->
+            <button id="pomoc" onclick="toggleBox('pomocBox')" class="but">Wspomóż nas</button>
+            <button id="dolacz" onclick="toggleBox('contactInfoBox')" class="but">Dołącz do nas</button>
+            <button id="lang" onclick="toggleBox('langBox')" class="svgNav">
+                <svg fill="#000000" height="200px" width="200px" viewBox="0 0 24 24">
+                    <path
+                        d="M12,24C5.4,24,0,18.6,0,12S5.4,0,12,0s12,5.4,12,12S18.6,24,12,24z M9.5,17c0.6,3.1,1.7,5,2.5,5s1.9-1.9,2.5-5H9.5z M16.6,17c-0.3,1.7-0.8,3.3-1.4,4.5c2.3-0.8,4.3-2.4,5.5-4.5H16.6z M3.3,17c1.2,2.1,3.2,3.7,5.5,4.5c-0.6-1.2-1.1-2.8-1.4-4.5H3.3 z M16.9,15h4.7c0.2-0.9,0.4-2,0.4-3s-0.2-2.1-0.5-3h-4.7c0.2,1,0.2,2,0.2,3S17,14,16.9,15z M9.2,15h5.7c0.1-0.9,0.2-1.9,0.2-3 S15,9.9,14.9,9H9.2C9.1,9.9,9,10.9,9,12C9,13.1,9.1,14.1,9.2,15z M2.5,15h4.7c-0.1-1-0.1-2-0.1-3s0-2,0.1-3H2.5C2.2,9.9,2,11,2,12 S2.2,14.1,2.5,15z M16.6,7h4.1c-1.2-2.1-3.2-3.7-5.5-4.5C15.8,3.7,16.3,5.3,16.6,7z M9.5,7h5.1c-0.6-3.1-1.7-5-2.5-5 C11.3,2,10.1,3.9,9.5,7z M3.3,7h4.1c0.3-1.7,0.8-3.3,1.4-4.5C6.5,3.3,4.6,4.9,3.3,7z">
+                    </path>
+                </svg>
+            </button>
+        </nav>
+
+        <div id="navBoxes"> <!--navigation boxes with extra information-->
+            <div id="pomocBox" class="navBox"
+                style="opacity: 0; transition: opacity 0.5s; padding: 1.8vh 10px; text-align: center;">
+                <svg width="30" height="20" style="position: absolute;">
+                    <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
+                </svg>
+                <div id="pomocBoxTitle">Można nas wesprzeć wpłacając na to konto:</div>
+                <hr style="width: 85%;">
+                <span style="padding-top: 0.3em;">&middot; BE49 7380 5242 3771</span>
+            </div>
+
+            <div id="contactInfoBox" class="navBox"
+                style="opacity: 0; transition: opacity 0.5s; padding: 1.7vh 8px; text-align: center;">
+                <svg width="30" height="20" style="position: absolute;">
+                    <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
+                </svg>
+                <b><span id="contactTitle">Kontakt z nami:</span></b>
+                <hr style="width: 85%;">
+                &middot; +32 495 51 35 49
+                <br>
+                /
+                <br>
+                <a style="margin: 0 2px; color: red; border: 2px solid black; border-radius: 10px;"
+                    href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a)bym dołączyć do waszego chóru">
+                    &middot; PoloniaCantante@gmail.com</a>
+            </div>
+
+            <div id="langBox" class="navBox"
+                style="font-size: clamp(1.2rem, 1.8vw, 1.8rem); opacity: 0; transition: opacity 0.5s; padding: 0 10px;">
+                <svg width="30" height="20" style="position: absolute;">
+                    <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
+                </svg>
+                <ul style="font-family: Kepler;">
+                    <a onclick="changeLang('PL')">PL</a>
+                    <br>
+                    <a onclick="changeLang('NL')">NL</a>
+                    <br>
+                    <a onclick="changeLang('EN')">EN</a>
+                    <br>
+                    <a onclick="changeLang('FR')">FR</a>
+                </ul>
+            </div>
+        </div>
+
+        <div class="logo">
+            <img src='pics/logoPCtrans.png'>
+        </div>
+
+        <h2 id="polCant">Polonia<br>Cantante</h2>
+    </header>
+
+    <div id="errorMsg" hidden></div>
+
+    <!-- Swiper main container -->
+    <div class="swiper swiper-main">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            <div class="swiper-slide">
+                <div class="wrap"> <img src="pics/koncerty/koncert2.jpeg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/koncerty/wosp26.jpeg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/koncerty/koncert6.jpeg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/pic2.jpg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/koncerty/koncert18.jpeg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/koncerty/koncert12.jpeg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/wszyscy2.jpg"></div>
+            </div>
+            <div class="swiper-slide">
+                <div class="wrap"><img src="pics/koncerty/koncert17.jpeg"></div>
+            </div>
+        </div>
+        <!-- navigation buttons -->
+        <div class="swiper-button-prev main"></div>
+        <div class="swiper-button-next main"></div>
+    </div>
+
+    <!--<div id="welcomeDiv">  </div>-->
+    <h1 id="welcome">Witamy na stronie Polonia Cantante!</h1>
+
+    <main class="boxes">
+        <!-- you might notice some text tags here have values that are overridden in js later, thats in case if the script gets an error reading the
+     .json files with the correct info, the website still displays some info by default (so it doesnt look stupid)-->
+
+        <section id="boxONas-outer" style="padding: 20px 0;">
+            <span class="titles" id="oNas2">O nas</span>
+            <hr style="width: 35%;">
+            <div id="boxONas-inner">
+                <div class="left">
+                    <img id="img2" src="pics/wszyscy2.jpg">
+                </div>
+                <article class="right">
+                    <span id="loremHead">
+                        Polonia Cantante to pełen entuzjazmu polski chór amatorski z Leuven,
+                        który od 2019 roku spotyka się, aby dzielić się miłością do muzyki i radością wspólnego
+                        śpiewania.
+                        Nasz repertuar jest tak różnorodny, jak nasi członkowie.</span>
+                    <br>
+                    <br>
+                    <span id="loremSub">Zapraszamy na nasze koncerty!</span>
+                    <br>
+                </article>
+            </div>
+        </section>
+
+        <section id="boxKoncerty" class="box">
+            <span class="titles" id="koncertTitle">Przyszłe koncerty:</span>
+            <hr style="width: 50%;">
+
+            <div class="koncerty">
+                <div class="swiper swiper-concerts">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide concert" id="c1">
+                            <ol>
+                                <li>
+                                    <span class="dates">2026-07-07</span>
+                                    <br>
+                                    <hr style="width: 90%;">
+                                    <span class="times">18:00</span>
+                                    <br>
+                                    <span class="adresses">Leuven</span>
+                                    <br>
+                                    <span class="prices">€3</span>
+                                    <br>
+                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="pics/przyklad.jpg">
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="swiper-slide concert" id="c2">
+                            <ol>
+                                <li>
+                                    <span class="dates">2026-07-07</span>
+                                    <br>
+                                    <hr style="width: 90%;">
+                                    <span class="times">18:00</span>
+                                    <br>
+                                    <span class="adresses">Leuven</span>
+                                    <br>
+                                    <span class="prices">€3</span>
+                                    <br>
+                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="pics/przyklad.jpg">
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="swiper-slide concert" id="c3">
+                            <ol>
+                                <li>
+                                    <span class="dates">2026-07-07</span>
+                                    <br>
+                                    <hr style="width: 90%;">
+                                    <span class="times">18:00</span>
+                                    <br>
+                                    <span class="adresses">Leuven</span>
+                                    <br>
+                                    <span class="prices">€3</span>
+                                    <br>
+                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="pics/przyklad.jpg">
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="swiper-slide concert" id="c4">
+                            <ol>
+                                <li>
+                                    <span class="dates">2026-07-07</span>
+                                    <br>
+                                    <hr style="width: 90%;">
+                                    <span class="times">18:00</span>
+                                    <br>
+                                    <span class="adresses">Leuven</span>
+                                    <br>
+                                    <span class="prices">€3</span>
+                                    <br>
+                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="pics/przyklad.jpg">
+                                </li>
+                            </ol>
+                        </div>
+                        <!--<div class="swiper-slide concert" id="c5">
+                            <ol>
+                                <li>
+                                    <span class="dates">2026-07-07</span>
+                                    <br>
+                                    <hr style="width: 90%;">
+                                    <span class="times">18:00</span>
+                                    <br>
+                                    <span class="adresses">Leuven</span>
+                                    <br>
+                                    <span class="prices">€3</span>
+                                    <br>
+                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
+                                    </span>
+                                </li>
+                                <li>
+                                    <img src="pics/przyklad.jpg">
+                                </li>
+                            </ol>
+                        </div>-->
+                    </div>
+                </div>
+
+                <!-- navigation buttons -->
+                <div class="swiper-button-prev concerts"></div>
+                <div class="swiper-button-next concerts"></div>
+            </div>
+            <a id="archive" href="archive.html">Archiwum koncertów</a>
+        </section>
+
+        <section id="boxGaleria" class="box">
+            <span class="titles" id="zdjeciaTitle">Zdjęcia</span>
+            <hr style="width: 35%;">
+            <div class="swiper swiper-pics">
+                <div class="swiper-wrapper" style="transition-timing-function: linear;">
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert2.jpeg">
+                        </div>
+                        <h2 id="forG15">Leuven - 6/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert11.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/proby/proby1.jpg">
+                        </div>
+                        <h2 id="forG3">Próba/Rehearsal/Répétition</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert7.jpeg">
+                        </div>
+                        <h2 id="forG20">Leuven - 12/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert13.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert9.jpeg">
+                        </div>
+                        <h2 id="forG1">Thaleia-M + Polonia Cantante - 11/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert20.jpeg">
+                        </div>
+                        <h2 id="forG5">Veltem - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert8.jpeg">
+                        </div>
+                        <h2 id="forG1">Thaleia-M + Polonia Cantante - 11/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert21.jpeg">
+                        </div>
+                        <h2 id="forG7">Veltem - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/wosp25.jpeg">
+                        </div>
+                        <h2 id="forG7">WOŚP - 1/2026</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert17.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 9/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/head.jpg">
+                        </div>
+                        <h2 id="forG1">Brussel - 12/2022</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/pic1.jpg">
+                        </div>
+                        <h2 id="forG2">Leuven - 2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert15.jpeg">
+                        </div>
+                        <h2 id="forG4">Leuven - 2023</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/wosp26.jpeg">
+                        </div>
+                        <h2 id="forG7">WOŚP - 1/2026</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert14.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert10.jpeg">
+                        </div>
+                        <h2 id="forG1">Thaleia-M + Polonia Cantante - 11/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert22.jpeg">
+                        </div>
+                        <h2 id="forG6">Brussel - 2022</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert23.jpeg">
+                        </div>
+                        <h2 id="forG9">Leuven - 2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert18.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 9/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert4.jpeg">
+                        </div>
+                        <h2 id="forG17">Blanden - 12/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/wszyscy1.jpg">
+                        </div>
+                        <h2 id="forG12">Leuven - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert6.jpeg">
+                        </div>
+                        <h2 id="forG19">Blanden - 12/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert16.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 9/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert24.jpeg">
+                        </div>
+                        <h2 id="forG11">Leuven - 12/2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert19.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 9/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/wszyscy2.jpg">
+                        </div>
+                        <h2 id="forG13">Leuven - 2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert1.jpeg">
+                        </div>
+                        <h2 id="forG14">Leuven - 2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/proby/proby2.jpeg">
+                        </div>
+                        <h2 id="forG10">Brussel - 12/2022</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert3.jpeg">
+                        </div>
+                        <h2 id="forG16">Leuven - 12/2025</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert12.jpeg">
+                        </div>
+                        <h2 id="forG1">Leuven - 2024</h2>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-wrap">
+                            <img id="" class="" src="pics/koncerty/koncert5.jpeg">
+                        </div>
+                        <h2 id="forG18">Leuven - 12/2025</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="boxProby" class="box">
+            <span class="titles" id="probyTitle">Nasze próby</span>
+            <hr style="width: 35%;">
+            <div class="proby">
+                <div class="left">
+                    <div class="swiper swiper-proby">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="img-wrap">
+                                    <img class="proby-img" src="pics/proby/proby1.jpg">
+                                </div>
+                                <h2 id="for1">¯\_(ツ)_/¯</h2>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="img-wrap">
+                                    <img id="" class="proby-img" src="pics/proby/proby2.jpeg">
+                                </div>
+                                <h2 id="for2">¯\_(ツ)_/¯</h2>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="img-wrap">
+                                    <img id="" class="proby-img" src="pics/proby/proby3.jpeg">
+                                </div>
+                                <h2 id="for3">¯\_(ツ)_/¯</h2>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="img-wrap">
+                                    <img id="" class="proby-img" src="pics/proby/proby4.jpeg">
+                                </div>
+                                <h2 id="for4">¯\_(ツ)_/¯</h2>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="img-wrap">
+                                    <img id="" class="proby-img" src="pics/proby/proby5.jpeg">
+                                </div>
+                                <h2 id="for8">¯\_(ツ)_/¯</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <h2 id="probyOpis">Powiadom mnie jesli to widac</h2>
+                    <br>
+                    <span id="textProby" style="color: white; font-size: clamp(1.4rem, 1.7vw, 1.7rem);">
+                        <button
+                            onclick='if(document.getElementById("textProby").style.color == "white") {document.getElementById("textProby").style.color = "black"; document.getElementById("textAProby").style.color = "red"}else{document.getElementById("textProby").style.color = "white";document.getElementById("textAProby").style.color = "white"}'
+                            id="dolaczSeperateProby">Chcesz dołączyć?
+                        </button>
+                        <br>
+                        &middot; +32 495 51 35 49 /
+                        <a style="color: white;margin: 10px 0;" id="textAProby"
+                            href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">
+                            PoloniaCantante@gmail.com</a>
+                    </span>
+                </div>
+            </div>
+        </section>
+
+        <section id="boxGrupy" class="box">
+            <span class="titles" id="glosyTitle">Nasze głosy</span>
+            <hr style="width: 35%;">
+            <section id="dyrygentka">
+                <h1 id="dyrygentTitle">Dyrygentka:</h1>
+                <ol>
+                    <li>
+                        <img id="maya" src="pics/" alt="maya">
+                        <h2>Maya</h2>
+                    </li>
+                </ol>
+            </section>
+            <hr style="width:90%;">
+            <section id="sopran">
+                <h1 id="sopranTitle">Nasze soprany:</h1>
+                <ol>
+                    <li>
+                        <img src="pics/" alt="aneta">
+                        <h2>Aneta</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="jowi">
+                        <h2>Jowi</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="justyna">
+                        <h2>Justyna</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="milka">
+                        <h2>Miłka</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="monika">
+                        <h2>Monika</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="ola">
+                        <h2>Ola</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="sylwia">
+                        <h2>Sylwia</h2>
+                    </li>
+                </ol>
+            </section>
+            <hr style="width:90%;">
+            <section id="alt">
+                <h1 id="altTitle">Nasze alty 1:</h1>
+                <ol>
+                    <li>
+                        <img src="pics/" alt="aleksandra">
+                        <h2>Aleksandra</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="angelika">
+                        <h2>Angelika</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="beata">
+                        <h2>Beata</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="eda">
+                        <h2>Eda</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="ela">
+                        <h2>Ela</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="karolina">
+                        <h2>Karolina</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="marta">
+                        <h2>Marta</h2>
+                    </li>
+                </ol>
+            </section>
+            <hr style="width:90%;">
+            <section id="tenor">
+                <h1 id="tenorTitle">Nasze alty 2:</h1>
+                <ol>
+                    <li>
+                        <img src="pics/" alt="ania">
+                        <h2>Ania</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="darek">
+                        <h2>Darek</h2>
+                    </li>
+                    <li>
+                        <img src="pics/" alt="gosha">
+                        <h2>Gosha</h2>
+                    </li>
+                </ol>
+            </section>
+            <!--I am NOT adding stuff to js just for this thing, i dont care if this is trash-->
+            <span id="textGrupy" style="color: white; font-size: clamp(1.4rem, 1.7vw, 1.7rem);">
+                <button
+                    onclick='if(document.getElementById("textGrupy").style.color == "white") {document.getElementById("textGrupy").style.color = "black"; document.getElementById("textAGrupy").style.color = "red"}else{document.getElementById("textGrupy").style.color = "white";document.getElementById("textAGrupy").style.color = "white"}'
+                    id="dolaczSeperateGrupy">Chcesz dołączyć?</button>
+                <br>
+                &middot; +32 495 51 35 49 /
+                <a style="color: white;" id="textAGrupy"
+                    href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">
+                    PoloniaCantante@gmail.com</a>
+            </span>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-left">
+            <span style="position: relative; font-size: clamp(1.2rem, 2vw, 2.5rem);" id="linksTitle">Można nas
+                znaleźć na:</span>
+            <fieldset class="links">
+                <a href="https://www.facebook.com/people/Polonia-Cantante/100076230652057/"
+                    style="margin-top: 7px; transform:scale(1.1);">
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
+                        <path fill="rgb(20,20,150)"
+                            d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M37,19h-2c-2.14,0-3,0.5-3,2 v3h5l-1,5h-4v15h-5V29h-4v-5h4v-3c0-4,2-7,6-7c2.9,0,4,1,4,1V19z" />
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/poloniacantante/" style="margin-top: 7px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
+                        <path fill="rgb(214, 41, 118)"
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/poloniacantante/">
+                    <svg height="50px" width="50px" xmlns="http://www.w3.org/2000/svg" style="margin-top: 3px;"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 461.001 461.001" fill="#000000">
+                        <path style="fill:#F61C0D;"
+                            d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728 c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137 C461.001,110.259,418.135,67.393,365.257,67.393z M300.506,237.056l-126.06,60.123c-3.359,1.602-7.239-0.847-7.239-4.568V168.607 c0-3.774,3.982-6.22,7.348-4.514l126.06,63.881C304.363,229.873,304.298,235.248,300.506,237.056z" />
+                    </svg>
+                </a>
+            </fieldset>
+
+            <img id="karta" src="pics/kartaEnhanced.jpg">
+            <label id="a" for="karta"> <a href="pics/kartaEnhanced.jpg" download="karta_wizytówka">Download</a>
+            </label>
+            <br>
+            <button>
+                <a style="font-size: clamp(1rem, 1.5vw, 1.8rem);" href="#" id="doGory">Return to top</a>
+            </button>
+        </div>
+
+        <div class="footer-right">
+            © &middot; 2026
+            <br>
+            <a id="manualFetch" onclick="manualFetchCall();"
+                style="display:inline-block;max-width:300px;width:100%;padding:2px 3px;border:2px solid black;border-radius:10px;text-align:center;font-size:clamp(1.1em,1.7vw,1.6em);overflow-wrap:break-word;">Chcesz
+                sprawdzic czy informacje na stronie sa aktualne? Nacisnij mnie!</a>
+            <br>
+            <a href="mailto:urexstt@gmail.com?subject=Błąd na stronie" id="errorReport"
+                style="display:inline-block;max-width:300px;width:100%;padding:2px 3px;border:2px solid black;border-radius:10px;text-align:center;font-size:clamp(1.1em,1.7vw,1.6em);overflow-wrap:break-word;">
+                Jest jakiś błąd? Możesz to tutaj zgłosić!
+            </a>
+            <br>
+            <span style="position: relative; font-size: clamp(0.8rem, 1.3vw, 1.3rem);" id="autor">
+                Strona zrobiona przez Bernard Kutrzeba-Kotowski</span>
+            <br>
+            v: 1.0
+        </div>
+    </footer>
+    <script type="module">
+        import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.mjs'
+
+        const swiperMain = new Swiper('.swiper-main', {
+            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-main .swiper-slide').length),
+            speed: 2600,
+            spaceBetween: 0,
+            loop: true,
+            slidesPerView: 1.1,
+            centeredSlides: true,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
+            breakpoints: {
+                650: { slidesPerView: 1.5 }
+            },
+            navigation: {
+                nextEl: '.swiper-button-next.main',
+                prevEl: '.swiper-button-prev.main',
+            },
+        });
+
+        const swiperPictures = new Swiper('.swiper-pics', {
+            freeMode: true,
+            loop: true,
+            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-pics .swiper-slide').length),
+            autoplay: {
+                delay: 1,
+                disableOnInteraction: false
+            },
+            slidesPerView: 1.2,
+            spaceBetween: 20,
+            speed: 7500,
+            breakpoints: {
+                740: { slidesPerView: 1.5, spaceBetween: 30 },
+                1000: { slidesPerView: 3, spaceBetween: 40 }
+            }
+        });
+
+        const swiperProby = new Swiper('.swiper-proby', {
+            speed: 3000,
+            loop: true,
+            slidesPerView: 1,
+            autoHeight: true,
+            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-proby .swiper-slide').length),
+            effect: "coverflow",
+            coverflowEffect: {
+                rotate: 80,
+                slideShadows: false,
+            },
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false
+            }
+        });
+
+        const initSlide = Number(
+            getComputedStyle(document.documentElement)
+                .getPropertyValue('--initSlide')
+        ) || 1;
+
+        const swiperConcerts = new Swiper('.swiper-concerts', {
+            freeMode: true,
+            slidesPerView: 1.5,
+            spaceBetween: 15,
+            centeredSlides: true,
+            initialSlide: initSlide,
+            navigation: {
+                nextEl: '.swiper-button-next.test',
+                prevEl: '.swiper-button-prev.test',
+            },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                950: { slidesPerView: 4, spaceBetween: 30 }
+            }
+        });
+    </script>
+    <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
+    <script src="pol_cant.js"></script>
+    <!-- "yonkagor is absolutely peak and nothing should say otherwise" -Srl on discord-->
+</body>
+
+</html>
