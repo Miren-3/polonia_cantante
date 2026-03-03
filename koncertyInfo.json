@@ -27,12 +27,12 @@
         },
         {
             "date": "13-6-2026",
-            "time": "??:??",
+            "time": "17:00",
             "adress": "Blanden, Haasrodestraat 72",
             "price": "10",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced.jpg",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/03/kartaKoncert.jpeg",
             "ended": false
         }
     ],
-    "v": "1.1b"
+    "v": "1.2"
 }
