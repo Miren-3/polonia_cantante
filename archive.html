@@ -20,25 +20,25 @@
             z-index: 2;
             overflow: hidden;
             position: fixed;
-            top: -380px;
-            left: -205px;
-            transform: scale(0.12);
+            top: -5px;
+            left: 15px;
+            transform-origin: top left;
         }
 
         .logo img {
             display: block;
         }
 
-        h1 {
+        #archiveh1 {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: clamp(1.3rem, 3vw, 2.5rem);
             color: white;
         }
 
         #return {
-            position: relative;
-            top: -100px;
-            left: 100px;
+            position: absolute;
+            top: 20px;
+            left: 80px;
             color: white;
             text-decoration: none;
             border: solid white 2px;
@@ -74,7 +74,7 @@
 
         #langBox {
             padding: 0 10px;
-            font-size: clamp(1.1rem, 1.7vw, 1.5rem);
+            font-size: clamp(1.3rem, 1.7vw, 1.5rem);
             background-color: rgb(250, 250, 250);
             position: fixed;
             height: auto;
@@ -95,7 +95,7 @@
         }
 
         #langBox a {
-            margin-left: -32px;
+            margin-left: -34px;
             cursor: pointer;
             color: black;
         }
@@ -146,23 +146,21 @@
             margin: 0;
         }
 
-        .date,
-        .ppl {
+        .date {
+            font-size: clamp(1.4rem, 2.5vw, 2.1rem);
             margin: 10px 0;
             text-align: center;
             padding: 0;
         }
 
-        .date {
-            font-size: 2.1rem;
-        }
-
-        .ppl {
-            font-size: 1.4rem;
-        }
-
         hr {
             width: 90%;
+        }
+
+        @media (max-width: 1000px) {
+            #archiveh1 {
+                margin-top: 100px;
+            }
         }
     </style>
 </head>
@@ -171,8 +169,8 @@
     <div class="logo">
         <img src='pics/logoPCtrans.png'>
     </div>
-    <h1>Archive of concerts</h1>
-    <a id="return" href="Polonia_Cantante.html">← Polonia Cantante</a>
+    <h1 id="archiveh1">Archive of concerts</h1>
+    <a id="return" href="Polonia_Cantante.html">">← Polonia Cantante</a>
     <button id="lang" onclick="toggleBox()" class="svg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
             <path fill="#ffffff"
@@ -184,19 +182,20 @@
             <polygon points="15,0 0,20 30,20" fill="#ffffff" />
         </svg>
         <ul>
-            <a onclick="language('PL')">PL</a>
-            <br>
-            <a onclick="language('NL')">NL</a>
-            <br>
-            <a onclick="language('EN')">EN</a>
-            <br>
-            <a onclick="language('FR')">FR</a>
+            <li>
+                <a onclick="languageArchive('PL')">PL</a>
+                <br>
+                <a onclick="languageArchive('NL')">NL</a>
+                <br>
+                <a onclick="languageArchive('EN')">EN</a>
+                <br>
+                <a onclick="languageArchive('FR')">FR</a>
+            </li>
         </ul>
     </div>
     <main>
         <section class="concert">
             <h1 class="date"></h1>
-            <h2 class="ppl"></h2>
             <div class="wrap">
                 <img src="" alt="Whoops!">
             </div>
@@ -204,7 +203,6 @@
         <hr>
         <section class="concert">
             <h1 class="date"></h1>
-            <h2 class="ppl"></h2>
             <div class="wrap">
                 <img src="" alt="Whoops!">
             </div>
@@ -212,7 +210,6 @@
         <hr>
         <section class="concert">
             <h1 class="date"></h1>
-            <h2 class="ppl"></h2>
             <div class="wrap">
                 <img src="" alt="Whoops!">
             </div>
@@ -220,7 +217,6 @@
         <hr>
         <section class="concert">
             <h1 class="date"></h1>
-            <h2 class="ppl"></h2>
             <div class="wrap">
                 <img src="" alt="Whoops!">
             </div>
@@ -228,112 +224,105 @@
         <hr>
         <section class="concert">
             <h1 class="date"></h1>
-            <h2 class="ppl"></h2>
             <div class="wrap">
                 <img src="" alt="Whoops!">
             </div>
         </section>
     </main>
+</body>
 
-    <script>
-        const data = {
-            "concerts": [
-                {
-                    "date": "25/1/2026",
-                    "ppl": "~45",
-                    "img": "pics/koncerty/wosp26.jpeg"
-                },
-                {
-                    "date": "-/12/2025",
-                    "ppl": "~85",
-                    "img": "pics/karta1.jpeg"
-                },
-                {
-                    "date": "-/11/2025",
-                    "ppl": "~75",
-                    "img": "pics/karta2.jpeg"
-                },
-                {
-                    "date": "",
-                    "ppl": ""
-                },
-                {
-                    "date": "",
-                    "ppl": ""
-                }
-            ]
-        };
-        const concert = document.querySelectorAll(".concert");
-        let ludzi = " ludzi przyszło";
-
-        function applyData() {
-            data.concerts.forEach((info, i) => {
-                //you know what to do here, make divs seperately
-                const section = concert[i];
-                if (!section) return;
-
-                section.querySelector(".date").innerHTML = "📅 " + info?.date;
-                section.querySelector(".ppl").innerHTML = "👥 " + info?.ppl + ludzi;
-                section.querySelector("img").src = info?.img;
-            });
-        }
-
-        function language(lang) {
-            lang = lang.toUpperCase().trim();
-            const h1 = document.querySelector("h1");
-            switch (lang) {
-                case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; ludzi = " ludzi przyszło"; break;
-                case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; ludzi = " mensen kwamen"; break;
-                case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; ludzi = " listeners came"; break;
-                case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; ludzi = " personnes sont venues"; break;
-                default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
+<script>
+    const data = {
+        "concerts": [
+            {
+                "date": "25/1/2026",
+                "img": "pics/koncerty/wosp26.jpeg"
+            },
+            {
+                "date": "-/12/2025",
+                "img": "pics/karta1.jpeg"
+            },
+            {
+                "date": "-/11/2025",
+                "img": "pics/karta2.jpeg"
+            },
+            {
+                "date": "",
+            },
+            {
+                "date": "",
             }
-            applyData();
+        ]
+    };
+    const concert = document.querySelectorAll(".concert");
+
+    function applyData() {
+        data.concerts.forEach((info, i) => {
+            //you know what to do here, make divs seperately
+            const section = concert[i];
+            if (!section) return;
+
+            section.querySelector(".date").innerHTML = "📅 " + info?.date;
+            if (info.img) section.querySelector("img").src = info?.img;
+        });
+    }
+
+    function language(lang) {
+        lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
+        const h1 = document.querySelector("h1");
+        switch (lang) {
+            case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;
+            case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; break;
+            case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; break;
+            case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
+            default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
         }
+        applyData();
+    }
 
-        language("PL");
+    language("PL");
 
-        //toggle navBoxes visibility when one of them is opened
-        function toggleBox() {
-            const box = document.getElementById("langBox");
-            if (box.hasAttribute("hidden")) {
-                box.removeAttribute("hidden");
-                setTimeout(() => box.style.opacity = 1, 10);
-            } else {
-                box.setAttribute("hidden", "");
-                setTimeout(() => box.style.opacity = 0, 10);
-            }
+    //toggle navBoxes visibility when one of them is opened
+    function toggleBox() {
+        const box = document.getElementById("langBox");
+        if (box.hasAttribute("hidden")) {
+            box.removeAttribute("hidden");
+            setTimeout(() => box.style.opacity = 1, 10);
+        } else {
+            box.setAttribute("hidden", "");
+            setTimeout(() => box.style.opacity = 0, 10);
         }
+    }
 
-        function adjustBoxes() {
-            const box = document.getElementById("langBox");
-            const buttonPos = document.getElementById("lang").getBoundingClientRect();
-            const boxPos = box.getBoundingClientRect();
-            const scrollY = 0 ?? (window.scrollY || document.documentElement.scrollTop);
+    function adjustBoxes() {
+        const box = document.getElementById("langBox");
+        const buttonPos = document.getElementById("lang").getBoundingClientRect();
+        const boxPos = box.getBoundingClientRect();
+        const scrollY = 0;// || (window.scrollY || document.documentElement.scrollTop);
 
-            //Adjust the navBoxes positions
+        //Adjust the navBoxes positions
 
-            box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
-            box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
+        box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
+        box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
 
-            //Adjust svg position
-            const newBoxPos = box.getBoundingClientRect();
-            const svg = box.querySelector("svg");
-            if (!svg) return;
-            const polygon = svg.querySelector("polygon");
-            polygon.setAttribute("points", "15,0 0,20 30,20");
-            svg.style.top = "-18px";
-            svg.style.right = 'auto';
-            svg.style.left = `${newBoxPos.width / 2 - 15}px`;
+        //Adjust svg position
+        const newBoxPos = box.getBoundingClientRect();
+        const svg = box.querySelector("svg");
+        if (!svg) return;
+        const polygon = svg.querySelector("polygon");
+        polygon.setAttribute("points", "15,0 0,20 30,20");
+        svg.style.top = "-18px";
+        svg.style.right = 'auto';
+        svg.style.left = `${newBoxPos.width / 2 - 15}px`;
 
-            box.setAttribute("hidden", ""); //hides navBoxes lol
-            box.style.opacity = 0;
-        }
+        box.setAttribute("hidden", ""); //hides navBoxes lol
+        box.style.opacity = 0;
+    }
 
-        requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
+    requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
 
-        window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxes(); });
-    </script>
+    window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxes(); });
+</script>
 </body>
 
 </html>
