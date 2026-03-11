@@ -1,3 +1,4 @@
+//if you see this, hey there! my discord is miren.3 or email me at ber.kk.11.2022@gmail.com if you want to contact me :)
 const langs = ["PL", "EN", "NL", "FR"];
 const default_lang = "PL";
 let current_lang = langs.includes(default_lang) ? default_lang : "EN";
@@ -44,6 +45,7 @@ async function fetchData(type, from) {//fetch jsons? lol
         return await fetched.json();
     } catch (err) {
         await showErrorDiv(`fetchData ${type}.json`);
+        console.error(`Mrn: Wrong link in datafetch ${type}.json`, err, from);
         throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
     }
 }
@@ -171,7 +173,6 @@ function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because
                 let top = 30;
                 if (helpBox === 'langBox') top = 52;
                 box.style.left = `${buttonPos.left - boxPos.width - top}px`;
-                //old code for helpBox: box.style.top = `${buttonPos.top / 2 + scrollY / 2}px`;
                 box.style.top = `${buttonPos.top + scrollY - buttonPos.height / 2}px`;
             }
         } else {
@@ -376,179 +377,4 @@ document.addEventListener('DOMContentLoaded', () => {//fetches again on load w i
     });
 });
 
-console.log("%c Hello! watch'ya doing here?\nuhh wanna manage the website for me (for free ofc cuz im a minor)? message me with the error report button :3", 'background: #222; color: #bada55; font-size: 20px;');
-/*
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
-document.addEventListener('DOMContentLoaded', () => {
-    const swiperMain = new Swiper('.swiper-main', {
-        initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-main .swiper-slide').length),
-        speed: 2600,
-        spaceBetween: 0,
-        loop: true,
-        slidesPerView: 1.1,
-        centeredSlides: true,
-        autoplay: {
-            delay: 2500,
-            disableOnInteraction: false
-        },
-        breakpoints: {
-            650: { slidesPerView: 1.25 },
-            950: { slidesPerView: 1.5 }
-        },
-        navigation: {
-            nextEl: '.swiper-button-next.main',
-            prevEl: '.swiper-button-prev.main',
-        },
-    });
-
-    const swiperPictures = new Swiper('.swiper-pics', {
-        freeMode: true,
-        loop: true,
-        initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-pics .swiper-slide').length),
-        autoplay: {
-            delay: 1,
-            disableOnInteraction: false
-        },
-        slidesPerView: 1.2,
-        spaceBetween: 20,
-        speed: 7500,
-        breakpoints: {
-            740: { slidesPerView: 1.5, spaceBetween: 30 },
-            1000: { slidesPerView: 3, spaceBetween: 40 }
-        }
-    });
-
-    const swiperProby = new Swiper('.swiper-proby', {
-        speed: 3000,
-        loop: true,
-        slidesPerView: 1,
-        autoHeight: true,
-        initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-proby .swiper-slide').length),
-        effect: "coverflow",
-        coverflowEffect: {
-            rotate: 80,
-            slideShadows: false,
-        },
-        autoplay: {
-            delay: 3500,
-            disableOnInteraction: false
-        }
-    });
-
-    const initSlide = Number(getComputedStyle(document.documentElement).getPropertyValue('--initSlide')) || 3;
-    const swiperConcerts = new Swiper('.swiper-concerts', {
-        freeMode: true,
-        slidesPerView: 'auto',
-        spaceBetween: 15,
-        centeredSlides: true,
-        initialSlide: initSlide,
-        navigation: {
-            nextEl: '.swiper-button-next.concerts',
-            prevEl: '.swiper-button-prev.concerts',
-        },
-        breakpoints: {
-            640: { slidesPerView: 2, spaceBetween: 20 },
-            950: { slidesPerView: 3.5, spaceBetween: 30 }
-        }
-    });
-});
-/*
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
-<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
-/*
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-*/        const dataArchive = {
-    "concerts": [
-        {
-            "date": "25/1/2026",
-            "img": "https://poloniacantante.org/wp-content/uploads/2026/02/wosp26.jpeg"
-        },
-        {
-            "date": "12/2025",
-            "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta1.jpeg"
-        },
-        {
-            "date": "11/2025",
-            "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta2.jpeg"
-        },
-        {
-            "date": "",
-        },
-        {
-            "date": "",
-        }
-    ]
-};
-const concertArchive = document.querySelectorAll(".concert");
-
-function applyDataArchive() {
-    dataArchive.concerts.forEach((info, i) => {
-        //you know what to do here, make divs seperately
-        const section = concertArchive[i];
-        if (!section) return;
-        section.querySelector(".date").innerHTML = "📅 " + info?.date;
-        if (info.img !== undefined) section.querySelector("img").src = info.img;
-    });
-}
-
-function languageArchive(lang) {
-    lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
-    const h1 = document.getElementById("archiveh1");
-    switch (lang) {
-        case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;
-        case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; break;
-        case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; break;
-        case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
-        default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
-    }
-    applyDataArchive();
-}
-languageArchive("PL");
-
-//toggle navBoxes visibility when one of them is opened
-function toggleBoxArchive() {
-    const box = document.getElementById("langBox");
-    if (box.hasAttribute("hidden")) {
-        box.removeAttribute("hidden");
-        setTimeout(() => box.style.opacity = 1, 10);
-    } else {
-        box.setAttribute("hidden", "");
-        setTimeout(() => box.style.opacity = 0, 10);
-    }
-}
-
-function adjustBoxesArchive() {
-    const box = document.getElementById("langBox");
-    const buttonPos = document.getElementById("lang").getBoundingClientRect();
-    const boxPos = box.getBoundingClientRect();
-    const scrollY = 0;// ?? (window.scrollY || document.documentElement.scrollTop);
-
-    //Adjust the navBoxes positions
-    box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
-    box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 15}px`;
-
-    //Adjust svg position
-    const newBoxPos = box.getBoundingClientRect();
-    const svg = box.querySelector("svg");
-    if (!svg) return;
-    const polygon = svg.querySelector("polygon");
-    polygon.setAttribute("points", "15,0 0,20 30,20");
-    svg.style.top = "-18px";
-    svg.style.right = 'auto';
-    svg.style.left = `${newBoxPos.width / 2 - 15}px`;
-
-    box.setAttribute("hidden", ""); //hides navBoxes lol
-    box.style.opacity = 0;
-}
-
-requestAnimationFrame(() => adjustBoxesArchive()); //first navBoxes adjustement, right after load
-window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxesArchive(); });
+console.log("%c Hello! watch'ya doing here?\nuh wanna manage the website for me (for free ofc cuz im a minor)? message me with the error report button :3", 'background: #222; color: #bada55; font-size: 20px;');

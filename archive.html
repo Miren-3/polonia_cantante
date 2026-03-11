@@ -20,16 +20,19 @@
             z-index: 2;
             overflow: hidden;
             position: fixed;
-            top: -5px;
+            top: 5px;
             left: 15px;
             transform-origin: top left;
         }
 
         .logo img {
+            width: 50px;
+            /* konkretna wartość */
+            height: auto;
             display: block;
         }
 
-        #archiveh1 {
+        h1 {
             text-align: center;
             font-size: clamp(1.3rem, 3vw, 2.5rem);
             color: white;
@@ -156,12 +159,6 @@
         hr {
             width: 90%;
         }
-
-        @media (max-width: 1000px) {
-            #archiveh1 {
-                margin-top: 100px;
-            }
-        }
     </style>
 </head>
 
@@ -169,28 +166,26 @@
     <div class="logo">
         <img src='pics/logoPCtrans.png'>
     </div>
-    <h1 id="archiveh1">Archive of concerts</h1>
-    <a id="return" href="Polonia_Cantante.html">">← Polonia Cantante</a>
+    <h1>Archive of concerts</h1>
+    <a id="return" href="Polonia_Cantante.html">← Polonia Cantante</a>
     <button id="lang" onclick="toggleBox()" class="svg">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
             <path fill="#ffffff"
                 d="M0 128C0 92.7 28.7 64 64 64l192 0 48 0 16 0 256 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64l-256 0-16 0-48 0L64 448c-35.3 0-64-28.7-64-64L0 128zm320 0l0 256 256 0 0-256-256 0zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1 73.6 0 8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276l-38 0 19-42.8zM448 164c11 0 20 9 20 20l0 4 44 0 16 0c11 0 20 9 20 20s-9 20-20 20l-2 0-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45L448 228l-72 0c-11 0-20-9-20-20s9-20 20-20l52 0 0-4c0-11 9-20 20-20z" />
         </svg>
     </button>
-    <div id="langBox" style="opacity: 0; transition: opacity 0.5s;" class="navBox">
+    <div id="langBox" style="opacity: 0; transition: opacity 0.6s;" class="navBox">
         <svg width="30" height="20" style="position: absolute;">
             <polygon points="15,0 0,20 30,20" fill="#ffffff" />
         </svg>
         <ul>
-            <li>
-                <a onclick="languageArchive('PL')">PL</a>
-                <br>
-                <a onclick="languageArchive('NL')">NL</a>
-                <br>
-                <a onclick="languageArchive('EN')">EN</a>
-                <br>
-                <a onclick="languageArchive('FR')">FR</a>
-            </li>
+            <a onclick="language('PL')">PL</a>
+            <br>
+            <a onclick="language('NL')">NL</a>
+            <br>
+            <a onclick="language('EN')">EN</a>
+            <br>
+            <a onclick="language('FR')">FR</a>
         </ul>
     </div>
     <main>
@@ -229,100 +224,105 @@
             </div>
         </section>
     </main>
-</body>
 
-<script>
-    const data = {
-        "concerts": [
-            {
-                "date": "25/1/2026",
-                "img": "pics/koncerty/wosp26.jpeg"
-            },
-            {
-                "date": "-/12/2025",
-                "img": "pics/karta1.jpeg"
-            },
-            {
-                "date": "-/11/2025",
-                "img": "pics/karta2.jpeg"
-            },
-            {
-                "date": "",
-            },
-            {
-                "date": "",
+    <script>
+        const data = {
+            "concerts": [
+                {
+                    "date": "25/1/2026",
+                    "ppl": "~45",
+                    "img": "pics/koncerty/wosp26.jpeg"
+                },
+                {
+                    "date": "-/12/2025",
+                    "ppl": "~85",
+                    "img": "pics/karta1.jpeg"
+                },
+                {
+                    "date": "-/11/2025",
+                    "ppl": "~75",
+                    "img": "pics/karta2.jpeg"
+                },
+                {
+                    "date": "",
+                    "ppl": ""
+                },
+                {
+                    "date": "",
+                    "ppl": ""
+                }
+            ]
+        };
+        const concert = document.querySelectorAll(".concert");
+        let ludzi = " ludzi przyszło";
+
+        function applyData() {
+            data.concerts.forEach((info, i) => {
+                //you know what to do here, make divs seperately
+                const section = concert[i];
+                if (!section) return;
+
+                section.querySelector(".date").innerHTML = "📅 " + info?.date;
+                section.querySelector("img").src = info?.img;
+            });
+        }
+
+        function language(lang) {
+            lang = lang.toUpperCase().trim();
+            const h1 = document.querySelector("h1");
+            switch (lang) {
+                case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; ludzi = " ludzi przyszło"; break;
+                case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; ludzi = " mensen kwamen"; break;
+                case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; ludzi = " listeners came"; break;
+                case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; ludzi = " personnes sont venues"; break;
+                default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
             }
-        ]
-    };
-    const concert = document.querySelectorAll(".concert");
-
-    function applyData() {
-        data.concerts.forEach((info, i) => {
-            //you know what to do here, make divs seperately
-            const section = concert[i];
-            if (!section) return;
-
-            section.querySelector(".date").innerHTML = "📅 " + info?.date;
-            if (info.img) section.querySelector("img").src = info?.img;
-        });
-    }
-
-    function language(lang) {
-        lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
-        const h1 = document.querySelector("h1");
-        switch (lang) {
-            case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;
-            case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; break;
-            case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; break;
-            case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
-            default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
+            applyData();
         }
-        applyData();
-    }
 
-    language("PL");
+        language("PL");
 
-    //toggle navBoxes visibility when one of them is opened
-    function toggleBox() {
-        const box = document.getElementById("langBox");
-        if (box.hasAttribute("hidden")) {
-            box.removeAttribute("hidden");
-            setTimeout(() => box.style.opacity = 1, 10);
-        } else {
-            box.setAttribute("hidden", "");
-            setTimeout(() => box.style.opacity = 0, 10);
+        //toggle navBoxes visibility when one of them is opened
+        function toggleBox() {
+            const box = document.getElementById("langBox");
+            if (box.hasAttribute("hidden")) {
+                box.removeAttribute("hidden");
+                setTimeout(() => box.style.opacity = 1, 10);
+            } else {
+                box.setAttribute("hidden", "");
+                setTimeout(() => box.style.opacity = 0, 10);
+            }
         }
-    }
 
-    function adjustBoxes() {
-        const box = document.getElementById("langBox");
-        const buttonPos = document.getElementById("lang").getBoundingClientRect();
-        const boxPos = box.getBoundingClientRect();
-        const scrollY = 0;// || (window.scrollY || document.documentElement.scrollTop);
+        function adjustBoxes() {
+            const box = document.getElementById("langBox");
+            const buttonPos = document.getElementById("lang").getBoundingClientRect();
+            const boxPos = box.getBoundingClientRect();
+            const scrollY = 0 ?? (window.scrollY || document.documentElement.scrollTop);
 
-        //Adjust the navBoxes positions
+            //Adjust the navBoxes positions
 
-        box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
-        box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
+            box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
+            box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
 
-        //Adjust svg position
-        const newBoxPos = box.getBoundingClientRect();
-        const svg = box.querySelector("svg");
-        if (!svg) return;
-        const polygon = svg.querySelector("polygon");
-        polygon.setAttribute("points", "15,0 0,20 30,20");
-        svg.style.top = "-18px";
-        svg.style.right = 'auto';
-        svg.style.left = `${newBoxPos.width / 2 - 15}px`;
+            //Adjust svg position
+            const newBoxPos = box.getBoundingClientRect();
+            const svg = box.querySelector("svg");
+            if (!svg) return;
+            const polygon = svg.querySelector("polygon");
+            polygon.setAttribute("points", "15,0 0,20 30,20");
+            svg.style.top = "-18px";
+            svg.style.right = 'auto';
+            svg.style.left = `${newBoxPos.width / 2 - 15}px`;
 
-        box.setAttribute("hidden", ""); //hides navBoxes lol
-        box.style.opacity = 0;
-    }
+            box.setAttribute("hidden", ""); //hides navBoxes lol
+            box.style.opacity = 0;
+        }
 
-    requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
+        requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
 
-    window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxes(); });
-</script>
+        window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxes(); });
+    </script>
 </body>
 
 </html>

@@ -29,8 +29,7 @@
         </nav>
 
         <div id="navBoxes"> <!--navigation boxes with extra information-->
-            <div id="pomocBox" class="navBox"
-                style="opacity: 0; transition: opacity 0.5s; padding: 1.8vh 10px; text-align: center;">
+            <div id="pomocBox" class="navBox" style="opacity: 0; padding: 1.8vh 10px; text-align: center;">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
@@ -39,8 +38,7 @@
                 <span style="padding-top: 0.3em;">&middot; BE49 7380 5242 3771</span>
             </div>
 
-            <div id="contactInfoBox" class="navBox"
-                style="opacity: 0; transition: opacity 0.5s; padding: 1.7vh 8px; text-align: center;">
+            <div id="contactInfoBox" class="navBox" style="opacity: 0; padding: 1.7vh 8px; text-align: center;">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
@@ -56,18 +54,15 @@
             </div>
 
             <div id="langBox" class="navBox"
-                style="font-size: clamp(1.2rem, 1.8vw, 1.8rem); opacity: 0; transition: opacity 0.5s; padding: 0 10px;">
+                style="font-size: clamp(1.35rem, 1.9vw, 1.9rem); opacity: 0; transition: opacity 0.5s; padding: 0 10px;">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
-                <ul style="font-family: Kepler;">
-                    <a onclick="changeLang('PL')">PL</a>
-                    <br>
-                    <a onclick="changeLang('NL')">NL</a>
-                    <br>
-                    <a onclick="changeLang('EN')">EN</a>
-                    <br>
-                    <a onclick="changeLang('FR')">FR</a>
+                <ul>
+                    <li><a onclick="changeLang('PL')">PL</a></li>
+                    <li><a onclick="changeLang('NL')">NL</a></li>
+                    <li><a onclick="changeLang('EN')">EN</a></li>
+                    <li><a onclick="changeLang('FR')">FR</a></li>
                 </ul>
             </div>
         </div>
@@ -79,7 +74,10 @@
         <h2 id="polCant">Polonia<br>Cantante</h2>
     </header>
 
-    <div id="errorMsg" hidden></div>
+    <div id="errorMsg" hidden>Whoops! Coś się zesrało xDD</div>
+
+    <!--<div id="welcomeDiv">  </div>-->
+    <h1 id="welcome">Witamy na stronie Polonia Cantante!</h1>
 
     <!-- Swiper main container -->
     <div class="swiper swiper-main">
@@ -116,19 +114,16 @@
         <div class="swiper-button-next main"></div>
     </div>
 
-    <!--<div id="welcomeDiv">  </div>-->
-    <h1 id="welcome">Witamy na stronie Polonia Cantante!</h1>
-
     <main class="boxes">
         <!-- you might notice some text tags here have values that are overridden in js later, thats in case if the script gets an error reading the
      .json files with the correct info, the website still displays some info by default (so it doesnt look stupid)-->
 
-        <section id="boxONas-outer" style="padding: 20px 0;">
+        <section id="boxONas-outer" style="padding: 15px 0;">
             <span class="titles" id="oNas2">O nas</span>
             <hr style="width: 35%;">
             <div id="boxONas-inner">
                 <div class="left">
-                    <img id="img2" src="pics/wszyscy2.jpg">
+                    <img id="img2" src="https://poloniacantante.org/wp-content/uploads/2026/02/wszyscy2.jpg">
                 </div>
                 <article class="right">
                     <span id="loremHead">
@@ -151,106 +146,6 @@
             <div class="koncerty">
                 <div class="swiper swiper-concerts">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide concert" id="c1">
-                            <ol>
-                                <li>
-                                    <span class="dates">2026-07-07</span>
-                                    <br>
-                                    <hr style="width: 90%;">
-                                    <span class="times">18:00</span>
-                                    <br>
-                                    <span class="adresses">Leuven</span>
-                                    <br>
-                                    <span class="prices">€3</span>
-                                    <br>
-                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <img src="pics/przyklad.jpg">
-                                </li>
-                            </ol>
-                        </div>
-                        <div class="swiper-slide concert" id="c2">
-                            <ol>
-                                <li>
-                                    <span class="dates">2026-07-07</span>
-                                    <br>
-                                    <hr style="width: 90%;">
-                                    <span class="times">18:00</span>
-                                    <br>
-                                    <span class="adresses">Leuven</span>
-                                    <br>
-                                    <span class="prices">€3</span>
-                                    <br>
-                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <img src="pics/przyklad.jpg">
-                                </li>
-                            </ol>
-                        </div>
-                        <div class="swiper-slide concert" id="c3">
-                            <ol>
-                                <li>
-                                    <span class="dates">2026-07-07</span>
-                                    <br>
-                                    <hr style="width: 90%;">
-                                    <span class="times">18:00</span>
-                                    <br>
-                                    <span class="adresses">Leuven</span>
-                                    <br>
-                                    <span class="prices">€3</span>
-                                    <br>
-                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <img src="pics/przyklad.jpg">
-                                </li>
-                            </ol>
-                        </div>
-                        <div class="swiper-slide concert" id="c4">
-                            <ol>
-                                <li>
-                                    <span class="dates">2026-07-07</span>
-                                    <br>
-                                    <hr style="width: 90%;">
-                                    <span class="times">18:00</span>
-                                    <br>
-                                    <span class="adresses">Leuven</span>
-                                    <br>
-                                    <span class="prices">€3</span>
-                                    <br>
-                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <img src="pics/przyklad.jpg">
-                                </li>
-                            </ol>
-                        </div>
-                        <!--<div class="swiper-slide concert" id="c5">
-                            <ol>
-                                <li>
-                                    <span class="dates">2026-07-07</span>
-                                    <br>
-                                    <hr style="width: 90%;">
-                                    <span class="times">18:00</span>
-                                    <br>
-                                    <span class="adresses">Leuven</span>
-                                    <br>
-                                    <span class="prices">€3</span>
-                                    <br>
-                                    <span class="buttons"> <a href="bilety.html" class="ticket">BILETY</a>
-                                    </span>
-                                </li>
-                                <li>
-                                    <img src="pics/przyklad.jpg">
-                                </li>
-                            </ol>
-                        </div>-->
                     </div>
                 </div>
 
@@ -474,31 +369,31 @@
                                 <div class="img-wrap">
                                     <img class="proby-img" src="pics/proby/proby1.jpg">
                                 </div>
-                                <h2 id="for1">¯\_(ツ)_/¯</h2>
+                                <h2 id="for1">Próba/Rehearsal/Repetitie</h2>
                             </div>
                             <div class="swiper-slide">
                                 <div class="img-wrap">
                                     <img id="" class="proby-img" src="pics/proby/proby2.jpeg">
                                 </div>
-                                <h2 id="for2">¯\_(ツ)_/¯</h2>
+                                <h2 id="for2">Próba/Rehearsal/Repetitie</h2>
                             </div>
                             <div class="swiper-slide">
                                 <div class="img-wrap">
                                     <img id="" class="proby-img" src="pics/proby/proby3.jpeg">
                                 </div>
-                                <h2 id="for3">¯\_(ツ)_/¯</h2>
+                                <h2 id="for3">Próba/Rehearsal/Repetitie</h2>
                             </div>
                             <div class="swiper-slide">
                                 <div class="img-wrap">
                                     <img id="" class="proby-img" src="pics/proby/proby4.jpeg">
                                 </div>
-                                <h2 id="for4">¯\_(ツ)_/¯</h2>
+                                <h2 id="for4">Próba/Rehearsal/Repetitie</h2>
                             </div>
                             <div class="swiper-slide">
                                 <div class="img-wrap">
                                     <img id="" class="proby-img" src="pics/proby/proby5.jpeg">
                                 </div>
-                                <h2 id="for8">¯\_(ツ)_/¯</h2>
+                                <h2 id="for8">Próba/Rehearsal/Repetitie</h2>
                             </div>
                         </div>
                     </div>
@@ -506,16 +401,10 @@
                 <div class="right">
                     <h2 id="probyOpis">Powiadom mnie jesli to widac</h2>
                     <br>
-                    <span id="textProby" style="color: white; font-size: clamp(1.4rem, 1.7vw, 1.7rem);">
-                        <button
-                            onclick='if(document.getElementById("textProby").style.color == "white") {document.getElementById("textProby").style.color = "black"; document.getElementById("textAProby").style.color = "red"}else{document.getElementById("textProby").style.color = "white";document.getElementById("textAProby").style.color = "white"}'
-                            id="dolaczSeperateProby">Chcesz dołączyć?
-                        </button>
-                        <br>
-                        &middot; +32 495 51 35 49 /
-                        <a style="color: white;margin: 10px 0;" id="textAProby"
-                            href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">
-                            PoloniaCantante@gmail.com</a>
+                    <span id="textProby" style="color: white">
+                        <button onclick='changeJoinColor("Proby");' id="dolaczSeperateProby">Chcesz
+                            dołączyć?</button><br>&middot; +32 495 51 35 49 / <a style="color: white" id="textAProby"
+                            href="mailto:poloniacantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">poloniacantante@gmail.com</a>
                     </span>
                 </div>
             </div>
@@ -528,7 +417,7 @@
                 <h1 id="dyrygentTitle">Dyrygentka:</h1>
                 <ol>
                     <li>
-                        <img id="maya" src="pics/" alt="maya">
+                        <img loading="lazy" width="150" height="175" src="pics/headshot/maya.png" alt="maya">
                         <h2>Maya</h2>
                     </li>
                 </ol>
@@ -538,31 +427,31 @@
                 <h1 id="sopranTitle">Nasze soprany:</h1>
                 <ol>
                     <li>
-                        <img src="pics/" alt="aneta">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/aneta.png" alt="aneta">
                         <h2>Aneta</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="jowi">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/jowi.png" alt="jowi">
                         <h2>Jowi</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="justyna">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/justyna.png" alt="justyna">
                         <h2>Justyna</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="milka">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/milka.png" alt="milka">
                         <h2>Miłka</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="monika">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/monika.png" alt="monika">
                         <h2>Monika</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="ola">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/ola.png" alt="ola">
                         <h2>Ola</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="sylwia">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/sylwia.png" alt="sylwia">
                         <h2>Sylwia</h2>
                     </li>
                 </ol>
@@ -572,31 +461,32 @@
                 <h1 id="altTitle">Nasze alty 1:</h1>
                 <ol>
                     <li>
-                        <img src="pics/" alt="aleksandra">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/aleksandra.png"
+                            alt="aleksandra">
                         <h2>Aleksandra</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="angelika">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/angelika.png" alt="angelika">
                         <h2>Angelika</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="beata">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/beata.png" alt="beata">
                         <h2>Beata</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="eda">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/eda.png" alt="eda">
                         <h2>Eda</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="ela">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/ela.png" alt="ela">
                         <h2>Ela</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="karolina">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/karolina.png" alt="karolina">
                         <h2>Karolina</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="marta">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/marta.png" alt="marta">
                         <h2>Marta</h2>
                     </li>
                 </ol>
@@ -606,53 +496,46 @@
                 <h1 id="tenorTitle">Nasze alty 2:</h1>
                 <ol>
                     <li>
-                        <img src="pics/" alt="ania">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/ania.png" alt="ania">
                         <h2>Ania</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="darek">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/darek.png" alt="darek">
                         <h2>Darek</h2>
                     </li>
                     <li>
-                        <img src="pics/" alt="gosha">
+                        <img loading="lazy" width="110" height="125" src="pics/headshot/gosha.png" alt="gosha">
                         <h2>Gosha</h2>
                     </li>
                 </ol>
             </section>
-            <!--I am NOT adding stuff to js just for this thing, i dont care if this is trash-->
-            <span id="textGrupy" style="color: white; font-size: clamp(1.4rem, 1.7vw, 1.7rem);">
-                <button
-                    onclick='if(document.getElementById("textGrupy").style.color == "white") {document.getElementById("textGrupy").style.color = "black"; document.getElementById("textAGrupy").style.color = "red"}else{document.getElementById("textGrupy").style.color = "white";document.getElementById("textAGrupy").style.color = "white"}'
-                    id="dolaczSeperateGrupy">Chcesz dołączyć?</button>
-                <br>
-                &middot; +32 495 51 35 49 /
-                <a style="color: white;" id="textAGrupy"
-                    href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">
-                    PoloniaCantante@gmail.com</a>
+            <span id="textGrupy" style="color: white;">
+                <button onclick='changeJoinColor("Grupy");' id="dolaczSeperateGrupy">Chcesz
+                    dołączyć?</button><br>&middot; +32 495 51 35 49 / <a id="textAGrupy" style="color: white;"
+                    href="mailto:poloniacantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">poloniacantante@gmail.com</a>
             </span>
         </section>
     </main>
 
     <footer>
         <div class="footer-left">
-            <span style="position: relative; font-size: clamp(1.2rem, 2vw, 2.5rem);" id="linksTitle">Można nas
-                znaleźć na:</span>
+            <span id="linksTitle">Można nas znaleźć na:</span>
             <fieldset class="links">
                 <a href="https://www.facebook.com/people/Polonia-Cantante/100076230652057/"
-                    style="margin-top: 7px; transform:scale(1.1);">
+                    style="transform:scale(1.1);">
                     <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="50" height="50" viewBox="0 0 50 50">
                         <path fill="rgb(20,20,150)"
                             d="M41,4H9C6.24,4,4,6.24,4,9v32c0,2.76,2.24,5,5,5h32c2.76,0,5-2.24,5-5V9C46,6.24,43.76,4,41,4z M37,19h-2c-2.14,0-3,0.5-3,2 v3h5l-1,5h-4v15h-5V29h-4v-5h4v-3c0-4,2-7,6-7c2.9,0,4,1,4,1V19z" />
                     </svg>
                 </a>
-                <a href="https://www.instagram.com/poloniacantante/" style="margin-top: 7px;">
+                <a href="https://www.instagram.com/poloniacantante/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24">
                         <path fill="rgb(214, 41, 118)"
                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>
                 </a>
                 <a href="https://www.youtube.com/poloniacantante/">
-                    <svg height="50px" width="50px" xmlns="http://www.w3.org/2000/svg" style="margin-top: 3px;"
+                    <svg height="50px" width="50px" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.3"
                         xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 461.001 461.001" fill="#000000">
                         <path style="fill:#F61C0D;"
                             d="M365.257,67.393H95.744C42.866,67.393,0,110.259,0,163.137v134.728 c0,52.878,42.866,95.744,95.744,95.744h269.513c52.878,0,95.744-42.866,95.744-95.744V163.137 C461.001,110.259,418.135,67.393,365.257,67.393z M300.506,237.056l-126.06,60.123c-3.359,1.602-7.239-0.847-7.239-4.568V168.607 c0-3.774,3.982-6.22,7.348-4.514l126.06,63.881C304.363,229.873,304.298,235.248,300.506,237.056z" />
@@ -660,114 +543,113 @@
                 </a>
             </fieldset>
 
-            <img id="karta" src="pics/kartaEnhanced.jpg">
+            <img id="karta" alt="Opis" loading="lazy" src="pics/kartaEnhanced.jpg">
             <label id="a" for="karta"> <a href="pics/kartaEnhanced.jpg" download="karta_wizytówka">Download</a>
             </label>
             <br>
-            <button>
-                <a style="font-size: clamp(1rem, 1.5vw, 1.8rem);" href="#" id="doGory">Return to top</a>
-            </button>
+            <a href="#" id="doGory">Return to top</a>
         </div>
 
         <div class="footer-right">
             © &middot; 2026
             <br>
-            <a id="manualFetch" onclick="manualFetchCall();"
-                style="display:inline-block;max-width:300px;width:100%;padding:2px 3px;border:2px solid black;border-radius:10px;text-align:center;font-size:clamp(1.1em,1.7vw,1.6em);overflow-wrap:break-word;">Chcesz
-                sprawdzic czy informacje na stronie sa aktualne? Nacisnij mnie!</a>
+            <a id="manualFetch" onclick="manualFetchCall();">Chcesz sprawdzic czy informacje na stronie sa aktualne?
+                Nacisnij mnie!</a>
             <br>
-            <a href="mailto:urexstt@gmail.com?subject=Błąd na stronie" id="errorReport"
-                style="display:inline-block;max-width:300px;width:100%;padding:2px 3px;border:2px solid black;border-radius:10px;text-align:center;font-size:clamp(1.1em,1.7vw,1.6em);overflow-wrap:break-word;">
+            <a href="mailto:urexstt@gmail.com?subject=Błąd na stronie" id="errorReport">
                 Jest jakiś błąd? Możesz to tutaj zgłosić!
             </a>
             <br>
-            <span style="position: relative; font-size: clamp(0.8rem, 1.3vw, 1.3rem);" id="autor">
+            <span id="autor">
                 Strona zrobiona przez Bernard Kutrzeba-Kotowski</span>
             <br>
-            v: 1.0
+            v: 1.1.5.2
         </div>
     </footer>
     <script type="module">
+
         import Swiper from 'https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.mjs'
+        document.addEventListener('DOMContentLoaded', () => {
+            const swiperMain = new Swiper('.swiper-main', {
+                initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-main .swiper-slide').length),
+                speed: 2600,
+                spaceBetween: 0,
+                loop: true,
+                slidesPerView: 1.1,
+                centeredSlides: true,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                breakpoints: {
+                    650: { slidesPerView: 1.5 }
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next.main',
+                    prevEl: '.swiper-button-prev.main',
+                },
+            });
 
-        const swiperMain = new Swiper('.swiper-main', {
-            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-main .swiper-slide').length),
-            speed: 2600,
-            spaceBetween: 0,
-            loop: true,
-            slidesPerView: 1.1,
-            centeredSlides: true,
-            autoplay: {
-                delay: 2500,
-                disableOnInteraction: false
-            },
-            breakpoints: {
-                650: { slidesPerView: 1.5 }
-            },
-            navigation: {
-                nextEl: '.swiper-button-next.main',
-                prevEl: '.swiper-button-prev.main',
-            },
-        });
+            const swiperPictures = new Swiper('.swiper-pics', {
+                freeMode: true,
+                loop: true,
+                initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-pics .swiper-slide').length),
+                autoplay: {
+                    delay: 1,
+                    disableOnInteraction: false
+                },
+                slidesPerView: 1.2,
+                spaceBetween: 20,
+                speed: 7500,
+                breakpoints: {
+                    740: { slidesPerView: 1.5, spaceBetween: 30 },
+                    1000: { slidesPerView: 3, spaceBetween: 40 }
+                }
+            });
 
-        const swiperPictures = new Swiper('.swiper-pics', {
-            freeMode: true,
-            loop: true,
-            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-pics .swiper-slide').length),
-            autoplay: {
-                delay: 1,
-                disableOnInteraction: false
-            },
-            slidesPerView: 1.2,
-            spaceBetween: 20,
-            speed: 7500,
-            breakpoints: {
-                740: { slidesPerView: 1.5, spaceBetween: 30 },
-                1000: { slidesPerView: 3, spaceBetween: 40 }
-            }
-        });
+            const swiperProby = new Swiper('.swiper-proby', {
+                speed: 3000,
+                loop: true,
+                slidesPerView: 1,
+                autoHeight: true,
+                initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-proby .swiper-slide').length),
+                effect: "coverflow",
+                coverflowEffect: {
+                    rotate: 80,
+                    slideShadows: false,
+                },
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false
+                }
+            });
 
-        const swiperProby = new Swiper('.swiper-proby', {
-            speed: 3000,
-            loop: true,
-            slidesPerView: 1,
-            autoHeight: true,
-            initialSlide: Math.round(Math.random() * document.querySelectorAll('.swiper-proby .swiper-slide').length),
-            effect: "coverflow",
-            coverflowEffect: {
-                rotate: 80,
-                slideShadows: false,
-            },
-            autoplay: {
-                delay: 3500,
-                disableOnInteraction: false
-            }
-        });
+            const initSlide = Number(
+                getComputedStyle(document.documentElement)
+                    .getPropertyValue('--initSlide')
+            ) || 1;
 
-        const initSlide = Number(
-            getComputedStyle(document.documentElement)
-                .getPropertyValue('--initSlide')
-        ) || 1;
-
-        const swiperConcerts = new Swiper('.swiper-concerts', {
-            freeMode: true,
-            slidesPerView: 1.5,
-            spaceBetween: 15,
-            centeredSlides: true,
-            initialSlide: initSlide,
-            navigation: {
-                nextEl: '.swiper-button-next.test',
-                prevEl: '.swiper-button-prev.test',
-            },
-            breakpoints: {
-                640: { slidesPerView: 2, spaceBetween: 20 },
-                950: { slidesPerView: 4, spaceBetween: 30 }
-            }
+            const swiperConcerts = new Swiper('.swiper-concerts', {
+                freeMode: true,
+                slidesPerView: 1.5,
+                spaceBetween: 15,
+                centeredSlides: true,
+                initialSlide: initSlide,
+                navigation: {
+                    nextEl: '.swiper-button-next.concerts',
+                    prevEl: '.swiper-button-prev.concerts',
+                },
+                breakpoints: {
+                    640: { slidesPerView: 2, spaceBetween: 20 },
+                    950: { slidesPerView: 4, spaceBetween: 30 }
+                }
+            });
         });
     </script>
     <!--<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>-->
     <script src="pol_cant.js"></script>
-    <!-- "yonkagor is absolutely peak and nothing should say otherwise" -Srl on discord-->
+    <!--<script type="module" src="../terminal.mjs"></script>
+     "yonkagor is absolutely peak and nothing should say otherwise" -Srl on discord-->
 </body>
 
 </html>
