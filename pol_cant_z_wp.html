@@ -760,29 +760,48 @@
 <!-- wp:html -->
 <body>
  <style>
-        #ticketsh1 {
-            position:relative;
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #ticketsh1,
+        #ticketsh2 {
             text-align: center;
-            line-height: 35px;
             color: white;
-            width: 90vw;
-            left: 5vw;
+            max-width: 90vw;
+            line-height: 40px;
+            font-size: 2rem;
         }
 
         button {
-            position: relative;
-            border: purple 3px double;
+            border: black 3px solid;
             background-color: lightblue;
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: red;
+            color: blue;
             cursor: pointer;
-            left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(32%);
+/*i know i shouldnt use transform but idrc*/
         }
     </style>
-    <h1 id="ticketsh1">Bilety nie dostępne / Tickets not available / Tickets zijn niet beschikbaar</h1>
+ <h1 id="ticketsh1">Bilety można kupić, dzwoniąc na ten numer
+        <br>
+        Tickets can be purchased by calling this number
+        <br>
+        Tickets kunnen worden gekocht door naar dit nummer te bellen
+        <br>
+        Pour acheter des billets, appelez ce numéro.
+    </h1>
+    <h2 id="ticketsh2">
+        <ol style="list-style: none;">
+            <li>+32 495 51 35 49</li>
+            <li>/</li>
+            <li>+32 465 56 33 42</li>
+        </ol>
+    </h2>
     <br>
-    <a href="https://poloniacantante.org"><button>Powróć</button></a>
+    <a href="https://poloniacantante.org"><button>Powróć / Return / Retourner / Teruggaan</button></a>
 </body>
 <!-- /wp:html -->
