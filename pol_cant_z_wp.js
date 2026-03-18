@@ -9,6 +9,10 @@ let langChange = true;
 let first = true;
 let fetched = false;
 let removeWrappers = true
+let rmBoxHandler = null;
+//checks to see if it fetched @ dom before website reloaded
+if (localStorage?.getItem("fetchedLastTime")) { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+//sets new date thats used in checking if it should fetch new files in an eventlistener
 !localStorage?.getItem("lastFetchDate") ? localStorage.setItem("lastFetchDate", JSON.stringify(Date.now())) : console.info('lastFetchDate availabe');
 
 async function loadKeys() {//load keys from cache
@@ -114,9 +118,11 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 mainBox.appendChild(ol);
                 document.querySelector(".swiper-concerts .swiper-wrapper").appendChild(mainBox);
             });
-            try { localStorage.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
+
             currentVConcerts = data["v"];
         }
+
+        try { localStorage.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
     } else if (type === "languages") {
         let dataLang = data[current_lang];
         if (data["v"] !== currentVLangs || langChange) { //if version is different or language changed
@@ -131,7 +137,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 }
             }
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").innerHTML = dataLang.concertEndedText);
-            if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 135);
+            if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 140);
             try { localStorage.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVLangs = data["v"];
         }
@@ -275,7 +281,18 @@ function toggleBox(id) {
         if (box.hasAttribute("hidden")) {
             box.removeAttribute("hidden");
             box.style.pointerEvents = 'auto';
-            //document.addEventListener('click', (e) => {if(e.x <= )})
+            setTimeout(() => {
+                rmBoxHandler = function (e) {
+                    const pos = box.getBoundingClientRect();
+                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom) {
+                        document.removeEventListener('click', rmBoxHandler);
+                        box.style.pointerEvents = 'none';
+                        box.setAttribute("hidden", "");
+                        setTimeout(() => box.style.opacity = 0, 10);
+                    }
+                };
+                document.addEventListener('click', rmBoxHandler);
+            }, 10);
             setTimeout(() => box.style.opacity = 1, 10);
         } else {
             box.style.pointerEvents = 'none';
@@ -289,7 +306,7 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
     console.log("editing grupy...", from);
     const grupyBox = document.getElementById("boxGrupy");
     dataPassed["rm"].forEach(name => {
-        const li = grupyBox.querySelector(`li img[alt='${name}']`);
+        const li = grupyBox.querySelector(`li img[alt='${name.toLowerCase()}']`);
         if (li) li.parentElement.remove();
     });
 
@@ -336,19 +353,33 @@ function scrollToId(id) {
     document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
+document.addEventListener("scroll", () => {
+    if (rmBoxHandler) {
+        document.removeEventListener('click', rmBoxHandler);
+        rmBoxHandler = null;
+    }
+    for (let box of ["langBox", "contactInfoBox", "pomocBox"]) {
+        const box2 = document.getElementById(box);
+        box2.style.pointerEvents = 'none';
+        box2.setAttribute("hidden", "");
+        setTimeout(() => box2.style.opacity = 0, 10);
+    }
+});
+
 //pretty self-explanatory
 let resizeRAF;
 window.addEventListener('resize', () => { toggleBox("all"); cancelAnimationFrame(resizeRAF); resizeRAF = requestAnimationFrame(() => { adjustBoxes(); }); });
 
-document.addEventListener('DOMContentLoaded', () => {//fetches again on load w if statements
+document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-    //if last fetch date is more than 20 hours ago (nobody knows why its 20), it fetches again (20 * 1000 * 60 * 60)
-    if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (20 * 1000 * 60 * 60)) {
+    //if last fetch date is more than 20 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
+    if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
         localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
         if (!fetched) {
-            applyData("languages", null, "fetch@dom");
-            applyData("koncertyInfo", null, "fetch@dom");
-            console.warn("fetched@dom");
+            await applyData("languages", null, "fetch@dom");
+            await applyData("koncertyInfo", null, "fetch@dom");
+            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ }
+            location.reload();
         }
     }
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
@@ -363,7 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {//fetches again on load w i
             innerDiv.style = "background-color: rgba(46, 84, 234, 0.95);max-width: 100%; max-height: 100%; width: 90%; height: auto;display: flex; justify-content: center; align-items: center;padding: 25px;position:relative;box-sizing: border-box;overflow:hidden;margin-top: 10px;border-radius: 15px;";
             const closeBtn = document.createElement('button');
             closeBtn.textContent = "X"
-            closeBtn.style = "position:absolute; top: 6vh; right: 10vw; left: auto; background-color: white; height: 50px; width: 50px;border: 2px solid black; border-radius: 5px; font-size: 2.8rem; cursor: pointer;z-index: 1001;padding: 0 0 10px 0; margin: 0;";
+            closeBtn.style = "position:absolute;top:15px;right:15px;left:auto;background-color:white;height:50px;width:50px;border: 2px solid black;border-radius:5px;font-size:2.8rem;cursor:pointer;z-index:1001;padding: 0 0 10px 0;margin:0;";
             closeBtn.onclick = () => document.body.removeChild(document.getElementById("imgFullScreen"));
             innerDiv.appendChild(closeBtn);
             const imgEl = document.createElement('img');

@@ -1,4 +1,4 @@
-//if you see this, hey there! my discord is miren.3 or email me at ber.kk.11.2022@gmail.com if you want to contact me :)
+//if you see this, hey there! my discord is miren.3 or email me at urexstt@gmail.com if you want to contact me :)
 const langs = ["PL", "EN", "NL", "FR"];
 const default_lang = "PL";
 let current_lang = langs.includes(default_lang) ? default_lang : "EN";
@@ -8,6 +8,10 @@ let currentVConcerts, currentVLangs;
 let langChange = true;
 let first = true;
 let fetched = false;
+let rmBoxHandler = null;
+//checks to see if it fetched @ dom before website reloaded
+if (localStorage?.getItem("fetchedLastTime")) { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+//sets new date thats used in checking if it should fetch new files in an eventlistener
 !localStorage?.getItem("lastFetchDate") ? localStorage.setItem("lastFetchDate", JSON.stringify(Date.now())) : console.info('lastFetchDate availabe');
 
 async function loadKeys() {//load keys from cache
@@ -16,7 +20,7 @@ async function loadKeys() {//load keys from cache
         if (cached) {
             const data = JSON.parse(cached);
             //passes data to applying function
-            key === "key_langs" ? currentVLangs = data["v"] : currentVConcerts = data["v"];
+            //key === "key_langs" ? currentVLangs = data["v"] : currentVConcerts = data["v"];
             await applyData(key === "key_langs" ? "languages" : "koncertyInfo", data, 'apply@loadKeys');
         } else {
             //if no cache it fetches the jsons and get saved to localStorage in applyData();
@@ -54,7 +58,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
     //if (!first) window.reload(); //to confirm later
     const data = dataPassed || await fetchData(type, from);
     if (type === "koncertyInfo") {
-        if (data["v"] !== currentVConcerts || first) { //if version is different, or first load
+        if (data["v"] !== currentVConcerts && first) { //if version is different, or first load
             first = false;
             document.documentElement.style.setProperty('--initSlide', data.initSlide);
             data.concerts.forEach((info, i) => {
@@ -115,10 +119,10 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 document.querySelector(".swiper-concerts .swiper-wrapper").appendChild(mainBox);
             });
 
-            console.log(`done applying ${type}!!1!1`);
-            try { localStorage.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVConcerts = data["v"];
         }
+
+        try { localStorage.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
     } else if (type === "languages") {
         let data = dataPassed || await fetchData(type, from);
         let dataLang = data[current_lang];
@@ -134,14 +138,11 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 }
             }
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").innerHTML = dataLang.concertEndedText);
-            if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 137);
+            if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 141);
             try { localStorage.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVLangs = data["v"];
         }
-        console.log(`done applying ${type}!!1!1`);
-
     } else console.log(`Hey ChatGPT, fix this! (none or wrong 'type(=${type})' given in applyData)`);
-    fetched = true; //shut up i know this is a random variable
     console.log(`done applying ${type}!!1!1 ver updated: ` + ((type === "languages" ? currentVLangs : currentVConcerts) === data['v'] ? false : true));
 }
 
@@ -209,6 +210,7 @@ function adjustBoxes() {
 
         box.style.pointerEvents = 'none';
         box.setAttribute("hidden", ""); //hides navBoxes lol
+        document.removeEventListener('click', rmBoxHandler);
         box.style.opacity = 0;
     }
 }
@@ -267,7 +269,18 @@ function toggleBox(id) {
         if (box.hasAttribute("hidden")) {
             box.removeAttribute("hidden");
             box.style.pointerEvents = 'auto';
-            //document.addEventListener('click', (e) => {if(e.x <= )})
+            setTimeout(() => {
+                rmBoxHandler = function (e) {
+                    const pos = box.getBoundingClientRect();
+                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom) {
+                        document.removeEventListener('click', rmBoxHandler);
+                        box.style.pointerEvents = 'none';
+                        box.setAttribute("hidden", "");
+                        setTimeout(() => box.style.opacity = 0, 10);
+                    }
+                };
+                document.addEventListener('click', rmBoxHandler);
+            }, 10);
             setTimeout(() => box.style.opacity = 1, 10);
         } else {
             box.style.pointerEvents = 'none';
@@ -281,7 +294,7 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
     console.log("editing grupy...", from);
     const grupyBox = document.getElementById("boxGrupy");
     dataPassed["rm"].forEach(name => {
-        const li = grupyBox.querySelector(`li img[alt='${name}']`);
+        const li = grupyBox.querySelector(`li img[alt='${name.toLowerCase()}']`);
         if (li) li.parentElement.remove();
     });
 
@@ -334,17 +347,32 @@ function scrollToId(id) {
 
 //pretty self-explanatory
 let resizeRAF;
-window.addEventListener('resize', () => { toggleBox("all"); cancelAnimationFrame(resizeRAF); resizeRAF = requestAnimationFrame(() => { adjustBoxes(); }); });
+window.addEventListener('resize', () => { toggleBox("all"); cancelAnimationFrame(resizeRAF); resizeRAF = requestAnimationFrame(() => adjustBoxes()); });
 
-document.addEventListener('DOMContentLoaded', () => {//fetches again on load w if statements
+document.addEventListener("scroll", () => {
+    if (rmBoxHandler) {
+        document.removeEventListener('click', rmBoxHandler);
+        rmBoxHandler = null;
+    }
+
+    for (let box of ["langBox", "contactInfoBox", "pomocBox"]) {
+        const box2 = document.getElementById(box);
+        box2.style.pointerEvents = 'none';
+        box2.setAttribute("hidden", "");
+        setTimeout(() => box2.style.opacity = 0, 10);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-    //if last fetch date is more than 20 hours ago (nobody knows why its 20), it fetches again (20 * 1000 * 60 * 60)
-    if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (20 * 1000 * 60 * 60)) {
+    //if last fetch date is more than 20 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
+    if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
         localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
         if (!fetched) {
-            applyData("languages", null, "fetch@dom");
-            applyData("koncertyInfo", null, "fetch@dom");
-            console.warn("fetched@dom");
+            await applyData("languages", null, "fetch@dom");
+            await applyData("koncertyInfo", null, "fetch@dom");
+            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ }
+            location.reload();
         }
     }
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
@@ -359,7 +387,7 @@ document.addEventListener('DOMContentLoaded', () => {//fetches again on load w i
             innerDiv.style = "background-color: rgba(46, 84, 234, 0.95);max-width: 100%; max-height: 100%; width: 90%; height: auto;display: flex; justify-content: center; align-items: center;padding: 25px;position:relative;box-sizing: border-box;overflow:hidden;margin-top: 10px;border-radius: 15px;";
             const closeBtn = document.createElement('button');
             closeBtn.textContent = "X"
-            closeBtn.style = "position:absolute; top: 6vh; right: 10vw; left: auto; background-color: white; height: 50px; width: 50px;border: 2px solid black; border-radius: 5px; font-size: 2.8rem; cursor: pointer;z-index: 1001;padding: 0 0 10px 0; margin: 0;";
+            closeBtn.style = "position:absolute;top:15px;right:15px;left:auto;background-color:white;height:50px;width:50px;border: 2px solid black;border-radius:5px;font-size:2.8rem;cursor:pointer;z-index:1001;padding: 0 0 10px 0;margin:0;";
             closeBtn.onclick = () => document.body.removeChild(document.getElementById("imgFullScreen"));
             innerDiv.appendChild(closeBtn);
             const imgEl = document.createElement('img');
@@ -373,4 +401,4 @@ document.addEventListener('DOMContentLoaded', () => {//fetches again on load w i
     });
 });
 
-console.log("%c Hello! watch'ya doing here?\nuh wanna manage the website for me (for free ofc cuz im a minor)? message me with the error report button :3", 'background: #222; color: #bada55; font-size: 20px;');
+console.log("%c Hello! watch'ya doing here?\nuh wanna manage the website for me (for free ofc cuz im a minor)? message me with the error report button :3", 'background: #222; color: #bada55; font-size: 18px;');
