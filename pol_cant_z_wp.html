@@ -756,7 +756,7 @@
     </main>
 </body>
 <!-- /wp:html -->
-
+ 
 <!-- wp:html -->
 <body>
  <style>
@@ -770,20 +770,36 @@
         #ticketsh2 {
             text-align: center;
             color: white;
-            max-width: 90vw;
-            line-height: 40px;
-            font-size: 2rem;
+            max-width: 85vw;
+            line-height: 30px;
+            font-size: clamp(0.9rem, 2.3vw, 2rem);
+
         }
 
-        button {
+        #aHrefTickets {
             border: black 3px solid;
             background-color: lightblue;
-            font-size: 1.8rem;
+            font-size: clamp(1rem, 2.2vw, 1.8rem);
             font-weight: bold;
             color: blue;
             cursor: pointer;
-            transform: translateX(32%);
-/*i know i shouldnt use transform but idrc*/
+            position: relative;
+            max-width: 70vw;
+            left: 24%;
+            overflow-wrap: break-word;
+            /*i know i shouldnt use transform but idrc*/
+        }
+
+        @media (max-width: 550px) {
+
+            #ticketsh1,
+            #ticketsh2 {
+                line-height: 20px;
+            }
+
+            #aHrefTickets {
+                left: 11%;
+            }
         }
     </style>
  <h1 id="ticketsh1">Bilety można kupić, dzwoniąc na ten numer
@@ -796,12 +812,10 @@
     </h1>
     <h2 id="ticketsh2">
         <ol style="list-style: none;">
-            <li>+32 495 51 35 49</li>
-            <li>/</li>
             <li>+32 465 56 33 42</li>
         </ol>
     </h2>
     <br>
-    <a href="https://poloniacantante.org"><button>Powróć / Return / Retourner / Teruggaan</button></a>
+    <a id="aHrefTickets" href="https://poloniacantante.org">Powróć / Return / Retourner / Terug</a>
 </body>
 <!-- /wp:html -->
