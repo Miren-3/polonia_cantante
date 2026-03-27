@@ -179,7 +179,7 @@ function adjustBoxes() {
                 box.style.top = `${window.innerHeight - 70 - boxPos.height}px`;
             } else {
                 let top = 30;
-                if (helpBox === 'langBox') top = 52;
+                if (helpBox === 'langBox') top = 60;
                 box.style.left = `${buttonPos.left - boxPos.width - top}px`;
                 //old code for helpBox: box.style.top = `${buttonPos.top / 2 + scrollY / 2}px`;
                 box.style.top = `${buttonPos.top + scrollY - buttonPos.height / 2}px`;
