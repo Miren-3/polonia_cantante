@@ -17,9 +17,8 @@
             text-align: center;
             color: white;
             max-width: 85vw;
-            line-height: 30px;
+            line-height: 40px;
             font-size: clamp(0.9rem, 2.3vw, 2rem);
-
         }
 
         #aHrefTickets {
@@ -29,22 +28,17 @@
             font-weight: bold;
             color: blue;
             cursor: pointer;
-            position: relative;
             max-width: 70vw;
-            left: 24%;
             overflow-wrap: break-word;
+            margin-left: 10px;
             /*i know i shouldnt use transform but idrc*/
         }
 
-        @media (max-width: 550px) {
+        @media (max-width: 700px) {
 
             #ticketsh1,
             #ticketsh2 {
                 line-height: 20px;
-            }
-
-            #aHrefTickets {
-                left: 11%;
             }
         }
     </style>
@@ -61,11 +55,11 @@
     </h1>
     <h2 id="ticketsh2">
         <ol style="list-style: none;">
-            <li>+32 465 56 33 42</li>
+            <li style="margin-right:30px;">+32 465 56 33 42</li>
         </ol>
     </h2>
     <br>
-    <a id="aHrefTickets" href="Polonia_Cantante.html"><button>Powróć / Return / Retourner / Terug</button></a>
+    <a id="aHrefTickets" href="Polonia_Cantante.html">Powróć / Return / Retourner / Terug</a>
 </body>
 <script>
 
