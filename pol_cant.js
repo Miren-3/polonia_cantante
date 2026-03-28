@@ -10,7 +10,7 @@ let first = true;
 let fetched = false;
 let rmBoxHandler = null;
 //checks to see if it fetched @ dom before website reloaded
-if (localStorage?.getItem("fetchedLastTime")) { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+if (localStorage?.getItem("fetchedLastTime") === true) { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
 //sets new date thats used in checking if it should fetch new files in an eventlistener
 !localStorage?.getItem("lastFetchDate") ? localStorage.setItem("lastFetchDate", JSON.stringify(Date.now())) : console.info('lastFetchDate availabe');
 
