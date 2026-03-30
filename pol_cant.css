@@ -43,11 +43,14 @@ ul {
     margin: 14px -1px;
     font-family: Kepler;
     list-style-type: none;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
 }
 
 ul li a {
     padding-left: 2px;
-    transition: background-color 0.45s ease;
+    transition: background-color 0.45s ease
 }
 
 ul li a:hover {
@@ -72,7 +75,7 @@ header {
     z-index: 2;
     overflow: hidden;
     position: fixed;
-    top: 4px;
+    top: 2.5px;
     left: 10px;
     transform-origin: top left;
 }
@@ -87,7 +90,7 @@ header {
 #polCant {
     z-index: 2;
     position: absolute;
-    top: -13px;
+    top: -14px;
     left: 75px;
     text-align: center;
     font-size: 2.2rem;
@@ -217,7 +220,7 @@ header {
     width: 100%;
     height: calc(100vh - 90px - 60px);
     overflow: hidden;
-    margin-top: -23px;
+    margin-top: -38px;
 }
 
 .swiper-slide {
@@ -237,8 +240,8 @@ header {
 }
 
 .swiper-slide img {
-    max-width: 95%;
-    max-height: 95%;
+    max-width: 90%;
+    max-height:  90%;
     width: auto;
     height: auto;
     display: block;

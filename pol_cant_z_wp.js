@@ -207,8 +207,8 @@ function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because
 
         if (removeWrappers) {//to remove the GODDAMN USELESS SPACE WASTING HORRENDOUS BR'S in the html :3
             removeWrappers = false;
-            for (let num of [4, 3, 1, 0]) document.querySelectorAll('#boxGrupy p')[19].querySelectorAll("br")[num].remove();
-            for (let num = 0; num <= 18; num++) document.querySelectorAll('#boxGrupy p')[0].remove();
+            for (let num of [3, 2, 0]) document.querySelectorAll('#boxGrupy p')[17].querySelectorAll("br")[num].remove();
+            for (let num = 0; num <= document.querySelectorAll("#boxGrupy ol li"); num++) document.querySelectorAll('#boxGrupy p')[0].remove();
             document.getElementById("navBar").querySelectorAll("br").forEach(i => i.remove());
             document.getElementById("pomocBox").querySelector("br").remove();
             document.getElementById("pomocBox").querySelector("p").remove();
@@ -219,6 +219,11 @@ function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because
             document.querySelectorAll('.footer-left a br').forEach(i => i.remove());
             document.querySelectorAll('.footer-left p')[0].remove();
             document.querySelectorAll('.boxes br')[0].remove();
+            document.querySelectorAll(".wp-site-blocks p")[document.querySelectorAll(".wp-site-blocks p").length - 1].remove();
+            document.querySelectorAll(".wp-site-blocks p")[0].remove();
+            document.querySelectorAll(".wp-site-blocks p")[12].remove();
+            document.getElementById("wp--skip-link--target").style.margin = 0;
+            document.querySelectorAll("#wp--skip-link--target p")[0].remove();
         }
 
         box.style.pointerEvents = 'none';
@@ -372,7 +377,7 @@ window.addEventListener('resize', () => { toggleBox("all"); cancelAnimationFrame
 
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-    //if last fetch date is more than 20 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
+    //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
     if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
         localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
         if (!fetched) {

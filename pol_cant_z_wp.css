@@ -40,14 +40,17 @@ hr {
 }
 
 ul {
-    margin: 14px -1px;
+    margin: 12px -1px;
     font-family: Kepler;
     list-style-type: none;
+	  display:flex;
+    gap: 2px;
+    flex-direction: column;
 }
 
 ul li a {
     padding-left: 2px;
-    transition: background-color 0.45s ease
+    transition: background-color 0.45s ease;
 }
 
 ul li a:hover {
@@ -165,7 +168,7 @@ header {
 }
 
 #langBox a {
-    margin-left: -36.5px;
+    margin-left: -36px;
 }
 
 #pomocBoxTitle {
@@ -739,7 +742,7 @@ footer button {
 
 @media (max-width: 950px) {
     .but {
-        font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+        font-size: clamp(1.1rem, 2.4vw, 1.6rem);
         align-items: end;
         color: white;
         border-color: white;
@@ -765,7 +768,7 @@ footer button {
         left: 40%;
         max-width: 60vw;
         -webkit-text-stroke: 0px;
-        top: 120px;
+        top: 110px;
     }
 
     .swiper-main {
