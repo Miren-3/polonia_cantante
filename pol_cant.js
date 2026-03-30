@@ -7,12 +7,12 @@ if (index !== -1) langs.splice(index, 1);
 let currentVConcerts, currentVLangs;
 let langChange = true;
 let first = true;
-let fetched = false;
+let fetched = false;;
 let rmBoxHandler = null;
 //checks to see if it fetched @ dom before website reloaded
-if (localStorage?.getItem("fetchedLastTime") === true) { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
 //sets new date thats used in checking if it should fetch new files in an eventlistener
-!localStorage?.getItem("lastFetchDate") ? localStorage.setItem("lastFetchDate", JSON.stringify(Date.now())) : console.info('lastFetchDate availabe');
+!localStorage?.getItem("lastFetchDate") ? console.info('lastFetchDate NOT availabe') : console.info('lastFetchDate availabe');
 
 async function loadKeys() {//load keys from cache
     for (let key of ["key_langs", "key_concerts"]) {
@@ -35,7 +35,9 @@ async function loadKeys() {//load keys from cache
         }
     }
 }
+
 loadKeys(); //initial load from cache
+
 async function fetchData(type, from) {//fetch jsons? lol
     console.log(`fetching data: ${type}...`, from);
     try {
@@ -44,7 +46,9 @@ async function fetchData(type, from) {//fetch jsons? lol
             await showErrorDiv(`fetchData ${type}.json`);
             throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
         }
+
         console.log(`finished fetching ${type}`, from); //kind of misleading but who cares really?
+        localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
         return await fetched.json();
     } catch (err) {
         await showErrorDiv(`fetchData ${type}.json`);
@@ -306,7 +310,7 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         const img = document.createElement("img");
         img.setAttribute("alt", name.split("_")[0]);
         img.onerror = function () { this.src = 'https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg'; }; //if no image found in files
-        img.src = `https://poloniacantante.org/wp-content/uploads/2026/02/${name.split("_")[0].toLowerCase().trim()}.png`;
+        img.src = `https://poloniacantante.org/wp-content/uploads/2026/03/${name.split("_")[0].trim()}.png`;
         /*old code:
         img.onerror = function () { this.src = 'pics/headshot/default.jpg'; }; //if no image found in files
         img.src = `pics/headshot/${name.split("_")[0].toLowerCase().trim()}.png`;
@@ -365,16 +369,14 @@ document.addEventListener("scroll", () => {
 
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-    //if last fetch date is more than 20 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
+    //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
     if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
-        localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
-        if (!fetched) {
             await applyData("languages", null, "fetch@dom");
             await applyData("koncertyInfo", null, "fetch@dom");
-            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ }
+            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
             location.reload();
-        }
     }
+    
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
 
     //makes a new div to showcase the pictures in bigger size
