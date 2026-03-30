@@ -136,8 +136,8 @@
         "concertEndedText": "Oei, het is gedaan! Tot de volgende keer!"
     },
     "ppl": {
-        "add": ["paulina_alt"],
+        "add": ["Paulina_alt"],
         "rm": ["DJ","Bert","marta","eda"]
     },
-    "v": "2.4"
+    "v": "2.4b"
 }
