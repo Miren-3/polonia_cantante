@@ -302,8 +302,10 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         if (li) li.parentElement.remove();
     });
 
+
+    
     dataPassed["add"].forEach(name => {
-        //if you get an error on line below, its most likely because of name isnt complete or languages json if fucked up
+        //if you get an error on line below, its most likely because of name isnt complete in languages json or if fucked up
         if (document.getElementById(name.split("_")[1]).contains(document.querySelector(`li img[alt='${name.split("_")[0]}']`))) return;
         console.log(`Mrn: for debugging: adding: ${name}`);
         const li = document.createElement("li");
