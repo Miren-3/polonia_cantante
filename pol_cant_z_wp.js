@@ -134,8 +134,8 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 if (key === "concertEndedText") document.querySelectorAll("#concertEndedText").forEach(i => i.textContent = "🕓 " + dataLang[key]);
                 else {
                     let el = document.getElementById(key);
-                    if (el && /^(?:[\w\s.,:;!'?&()ąćęłńóśżźĄĆĘŁŃÓŚŻŹ’Àôéêàœ<>/\-]|<(br|b|strong|i|em|span)>)+$/.test(dataLang[key])) el.innerHTML = dataLang[key];
-                    else console.warn(`Mrn: Element with id '${key}' not found in html... or regex fucked it up`);
+                    if (el) el.textContent = dataLang[key];
+                    else console.warn(`Mrn: Element with id '${key}' not found in html...`);
                 }
             }
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").innerHTML = dataLang.concertEndedText);
