@@ -10,7 +10,7 @@
         "proby": "Próby",
         "pomoc": "Wspomóż nas",
         "dolacz": "Dołącz do nas",
-        "pomocBoxTitle": "Możesz nas wesprzeć wpłacając<br>dowolną kwotę na konto:",
+        "pomocBoxTitle": "Możesz nas wesprzeć wpłacając dowolną kwotę na konto:",
         "contactTitle": "Kontakt z nami:",
         "loremHead": "Polonia Cantante to pełen entuzjazmu polski chór amatorski z Leuven, który od 2019 roku spotyka się, aby dzielić się miłością do muzyki i radością wspólnego śpiewania. Nasz repertuar jest tak różnorodny, jak nasi członkowie.",
         "loremSub": "Zapraszamy na nasze koncerty!",
@@ -29,7 +29,8 @@
         "linksTitle": "Można nas znaleźć na:",
         "doGory": "Wróć na górę",
         "errorReport": "Jest jakiś błąd? Możesz to tutaj zgłosić!",
-        "autor": "Strona i tłumaczenia zrobione przez Bernard K-K<br>Ta strona jest open source na github.com/Miren-3",
+        "autor": "Strona i tłumaczenia zrobione przez Bernard K-K",
+        "github": "Strona jest open source na github.com/Miren-3",
         "manualFetch": "Chcesz sprawdzić, czy informacje na stronie są aktualne?",
         "concertEndedText": "Ups, Minęło! Do następnego razu!"
     },
@@ -44,7 +45,7 @@
         "proby": "Rehearsals",
         "pomoc": "Support us",
         "dolacz": "Join us",
-        "pomocBoxTitle": "You can support us by donating any<br>amount to the following account:",
+        "pomocBoxTitle": "You can support us by donating any amount to the following account:",
         "contactTitle": "Contact us:",
         "loremHead": "Polonia Cantante is an enthusiastic Polish amateur choir from Leuven that has been meeting since 2019 to share a love of music and the joy of singing together. Our repertoire is as diverse as our members.",
         "loremSub": "Join us for our concerts!",
@@ -63,7 +64,8 @@
         "linksTitle": "You can find us on:",
         "doGory": "Back to top",
         "errorReport": "Saw any errors? Report them here!",
-        "autor": "Website and translations by Bernard K-K<br>The code is open source on github.com/Miren-3",
+        "autor": "Website and translations by Bernard K-K",
+        "github": "The code is open source on github.com/Miren-3",
         "manualFetch": "Want to check if the information on the website is up to date?",
         "concertEndedText": "Oops, it ended! See you next time!"
     },
@@ -78,7 +80,7 @@
         "proby": "Répétitions",
         "pomoc": "Soutien",
         "dolacz": "Adhérer",
-        "pomocBoxTitle": "Vous pouvez nous soutenir en<br>versant un montant de votre<br>choix sur le compte suivant:",
+        "pomocBoxTitle": "Vous pouvez nous soutenir en versant un montant de votre choix sur le compte suivant:",
         "contactTitle": "Contactez-nous:",
         "loremHead": "Polonia Cantante est un chœur amateur polonais enthousiaste de Louvain qui se réunit depuis 2019 pour partager l’amour de la musique et la joie de chanter ensemble. Notre répertoire est aussi varié que nos membres.",
         "loremSub": "Nous vous invitons à nos concerts !",
@@ -97,7 +99,8 @@
         "linksTitle": "Vous pouvez nous trouver sur:",
         "doGory": "Retour en haut",
         "errorReport": "Y-a-t-il une erreur? Signalez-la ici!",
-        "autor": "Site et traductions créés par Bernard K-K<br>Le site est open source sur: github.com/Miren-3",
+        "autor": "Site et traductions créés par Bernard K-K",
+        "github": ">Le site a le source ouverte sur: github.com/Miren-3",
         "manualFetch": "Voulez-vous vérifier si les informations sur le site sont à jour?",
         "concertEndedText": "Oups, c'est fini! À la prochaine!"
     },
@@ -112,7 +115,7 @@
         "proby": "Repetities",
         "pomoc": "Steun ons",
         "dolacz": "Sluit je aan",
-        "pomocBoxTitle": "U kunt ons steunen door een<br>willekeurig bedrag over te<br>maken naar de volgende rekening:",
+        "pomocBoxTitle": "U kunt ons steunen door een willekeurig bedrag over te maken naar de volgende rekening:",
         "contactTitle": "Contact met ons:",
         "loremHead": "Polonia Cantante is een enthousiast Pools amateurkoor uit Leuven dat sinds 2019 samenkomt om de liefde voor muziek en het plezier van samen zingen te delen. Ons repertoire is net zo divers als onze leden.",
         "loremSub": "Kom naar onze concerten!",
@@ -131,13 +134,21 @@
         "linksTitle": "U kunt ons vinden op:",
         "doGory": "Terug naar boven",
         "errorReport": "Een fout gevonden? Meld het hier!",
-        "autor": "Website en vertalingen gemaakt door Bernard K-K<br>De website is open-source op github.com/Miren-3",
+        "autor": "Website en vertalingen gemaakt door Bernard K-K",
+        "github": "De website is open-source op github.com/Miren-3",
         "manualFetch": "Wil je controleren of de informatie op de website up-to-date is?",
         "concertEndedText": "Oei, het is gedaan! Tot de volgende keer!"
     },
     "ppl": {
-        "add": ["Paulina_alt"],
-        "rm": ["DJ","Bert","marta","eda"]
+        "add": [
+            "Paulina_alt"
+        ],
+        "rm": [
+            "DJ",
+            "Bert",
+            "marta",
+            "eda"
+        ]
     },
-    "v": "2.4b"
+    "v": "2.5"
 }

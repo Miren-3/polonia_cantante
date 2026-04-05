@@ -200,14 +200,14 @@ header {
     width: max-content;
     max-width: 80vw;
     transform: translate(-50%, -50%);
-    font-size: clamp(1.9rem, 3.5vw, 3rem);
+    font-size: clamp(1.9rem, 3.5vw, 3.2rem);
     font-family: monospace;
     font-weight: bold;
     text-align: center;
     color: white;
     -webkit-text-stroke: 1px black;
     backdrop-filter: blur(4px);
-    top: 7px;
+    top: 10px;
 }
 
 .swiper {
@@ -218,9 +218,9 @@ header {
 .swiper-main {
     position: relative;
     width: 100%;
-    height: calc(100vh - 90px - 60px);
+    height: calc(100vh - 90px - 65px);
     overflow: hidden;
-    margin-top: -38px;
+    margin-top: -70px;
 }
 
 .swiper-slide {
@@ -240,7 +240,7 @@ header {
 }
 
 .swiper-slide img {
-    max-width: 90%;
+    max-width: 95%;
     max-height:  90%;
     width: auto;
     height: auto;

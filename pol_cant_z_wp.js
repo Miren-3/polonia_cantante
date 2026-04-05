@@ -10,6 +10,7 @@ let first = true;
 let fetched = false;
 let removeWrappers = true;
 let rmBoxHandler = null;
+let allowError = true;
 //checks to see if it fetched @ dom before website reloaded
 if (localStorage?.getItem("fetchedLastTime") === 'true') { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
 //sets new date thats used in checking if it should fetch new files in an eventlistener
@@ -46,7 +47,7 @@ async function fetchData(type, from) {//fetch jsons? lol
             throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
         }
         console.log(`finished fetching ${type}`, from); //kind of misleading but who cares really?
-		localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
+        localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
         return await fetched.json();
     } catch (err) {
         await showErrorDiv(`fetchData ${type}.json`);
@@ -220,11 +221,11 @@ function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because
             document.querySelectorAll('.footer-left a br').forEach(i => i.remove());
             document.querySelectorAll('.footer-left p')[0].remove();
             document.querySelectorAll('.boxes br')[0].remove();
-			document.querySelectorAll(".wp-site-blocks p")[document.querySelectorAll(".wp-site-blocks p").length - 1].remove();
-			document.querySelectorAll(".wp-site-blocks p")[0].remove();
-			document.querySelectorAll(".wp-site-blocks p")[12].remove();
-			document.getElementById("wp--skip-link--target").style.margin = 0;
-			document.querySelectorAll("#wp--skip-link--target p")[0].remove();
+            document.querySelectorAll(".wp-site-blocks p")[document.querySelectorAll(".wp-site-blocks p").length - 1].remove();
+            document.querySelectorAll(".wp-site-blocks p")[0].remove();
+            document.querySelectorAll(".wp-site-blocks p")[12].remove();
+            document.getElementById("wp--skip-link--target").style.margin = "-10px";
+            document.querySelectorAll("#wp--skip-link--target p")[0].remove();
         }
 
         box.style.pointerEvents = 'none';
@@ -234,7 +235,6 @@ function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because
 }
 
 //Shows an error message on (top of) the screen
-let allowError = true;
 async function showErrorDiv(info) {
     if (allowError) {
         allowError = false;
@@ -290,7 +290,7 @@ function toggleBox(id) {
             setTimeout(() => {
                 rmBoxHandler = function (e) {
                     const pos = box.getBoundingClientRect();
-                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom) {
+                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom || box.hasAttribute("hidden")) {
                         document.removeEventListener('click', rmBoxHandler);
                         box.style.pointerEvents = 'none';
                         box.setAttribute("hidden", "");
@@ -380,12 +380,12 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
     //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
     if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
-            await applyData("languages", null, "fetch@dom");
-            await applyData("koncertyInfo", null, "fetch@dom");
-            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
-            location.reload();
+        await applyData("languages", null, "fetch@dom");
+        await applyData("koncertyInfo", null, "fetch@dom");
+        try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
+        location.reload();
     }
-	
+
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
 
     //makes a new div to showcase the pictures in bigger size

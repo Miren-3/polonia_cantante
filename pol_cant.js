@@ -7,8 +7,9 @@ if (index !== -1) langs.splice(index, 1);
 let currentVConcerts, currentVLangs;
 let langChange = true;
 let first = true;
-let fetched = false;;
+let fetched = false;
 let rmBoxHandler = null;
+let allowError = true;
 //checks to see if it fetched @ dom before website reloaded
 if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
 //sets new date thats used in checking if it should fetch new files in an eventlistener
@@ -220,7 +221,6 @@ function adjustBoxes() {
 }
 
 //Shows an error message on (top of) the screen
-let allowError = true;
 async function showErrorDiv(info) {
     if (allowError) {
         allowError = false;
@@ -276,7 +276,7 @@ function toggleBox(id) {
             setTimeout(() => {
                 rmBoxHandler = function (e) {
                     const pos = box.getBoundingClientRect();
-                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom) {
+                    if (e.x < pos.left || e.x > pos.right || e.y < pos.top || e.y > pos.bottom || box.hasAttribute("hidden")) {
                         document.removeEventListener('click', rmBoxHandler);
                         box.style.pointerEvents = 'none';
                         box.setAttribute("hidden", "");
@@ -302,10 +302,8 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         if (li) li.parentElement.remove();
     });
 
-
-    
     dataPassed["add"].forEach(name => {
-        //if you get an error on line below, its most likely because of name isnt complete in languages json or if fucked up
+        //if you get an error on line below, its most likely because of name isnt complete or languages json if fucked up
         if (document.getElementById(name.split("_")[1]).contains(document.querySelector(`li img[alt='${name.split("_")[0]}']`))) return;
         console.log(`Mrn: for debugging: adding: ${name}`);
         const li = document.createElement("li");
@@ -373,12 +371,12 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
     //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
     if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
-            await applyData("languages", null, "fetch@dom");
-            await applyData("koncertyInfo", null, "fetch@dom");
-            try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
-            location.reload();
+        await applyData("languages", null, "fetch@dom");
+        await applyData("koncertyInfo", null, "fetch@dom");
+        try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
+        location.reload();
     }
-    
+
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
 
     //makes a new div to showcase the pictures in bigger size
