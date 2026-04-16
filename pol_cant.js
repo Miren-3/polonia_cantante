@@ -7,15 +7,16 @@ if (index !== -1) langs.splice(index, 1);
 let currentVConcerts, currentVLangs;
 let langChange = true;
 let first = true;
-let fetched = false;
+//let fetched = false;
 let rmBoxHandler = null;
 let allowError = true;
-//checks to see if it fetched @ dom before website reloaded
-if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
-//sets new date thats used in checking if it should fetch new files in an eventlistener
-!localStorage?.getItem("lastFetchDate") ? console.info('lastFetchDate NOT availabe') : console.info('lastFetchDate availabe');
+//checks to see if it fetched at dom before website reloaded
+if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage?.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+//check to see if lastFetchDate is available
+console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ? true : false}`);
 
-async function loadKeys() {//load keys from cache
+//initial load from cache
+(async () => {
     for (let key of ["key_langs", "key_concerts"]) {
         const cached = localStorage.getItem(key);
         if (cached) {
@@ -25,35 +26,31 @@ async function loadKeys() {//load keys from cache
             await applyData(key === "key_langs" ? "languages" : "koncertyInfo", data, 'apply@loadKeys');
         } else {
             //if no cache it fetches the jsons and get saved to localStorage in applyData();
-            try {
-                fetched = true;
+            try {//fetched = true;
                 const data = await fetchData(key === "key_langs" ? "languages" : "koncertyInfo", 'fetch@loadKeysFetch')
                 await applyData(key === "key_langs" ? "languages" : "koncertyInfo", data, 'apply@loadKeysFetch')
-            } catch (e) {
-                fetched = false;
+            } catch (e) {//fetched = false;
                 console.warn("Mrn: loadKeys: fetch failed, using fallback (aka cache you stupid)", e);
             }
         }
     }
-}
-
-loadKeys(); //initial load from cache
+})();
 
 async function fetchData(type, from) {//fetch jsons? lol
     console.log(`fetching data: ${type}...`, from);
     try {
         const fetched = await fetch(`https://raw.githubusercontent.com/Miren-3/polonia_cantante/refs/heads/main/${type}.json`);
         if (!fetched.ok) {
-            await showErrorDiv(`fetchData ${type}.json`);
+            showErrorDiv(`fetchData ${type}.json`);
             throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
         }
 
-        console.log(`finished fetching ${type}`, from); //kind of misleading but who cares really?
-        localStorage.setItem("lastFetchDate", JSON.stringify(Date.now()));
+        try { localStorage?.setItem("lastFetchDate", JSON.stringify(Date.now())); } catch (e) { console.error(e); }
+        console.info(`finished fetching ${type}`, from); //kind of misleading but who cares really?
         return await fetched.json();
     } catch (err) {
-        await showErrorDiv(`fetchData ${type}.json`);
-        console.error(`Mrn: Wrong link in datafetch ${type}.json`, err, from);
+        showErrorDiv(`fetchData ${type}.json`);
+        //console.error(`Mrn: Wrong link in datafetch ${type}.json`, err, from);
         throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
     }
 }
@@ -63,7 +60,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
     //if (!first) window.reload(); //to confirm later
     const data = dataPassed || await fetchData(type, from);
     if (type === "koncertyInfo") {
-        if (data["v"] !== currentVConcerts && first) { //if version is different, or first load
+        if (data["v"] !== currentVConcerts && first) { //if version is different, or first load, need to recheck
             first = false;
             document.documentElement.style.setProperty('--initSlide', data.initSlide);
             data.concerts.forEach((info, i) => {
@@ -77,7 +74,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 const li = document.createElement('li');
                 const spanDates = document.createElement('span');
                 spanDates.classList.add('dates');
-                spanDates.innerHTML = "📅 " + info?.date || "7-7-2026";
+                spanDates.textContent = "📅 " + (info?.date || "7-7-2026");
                 mainLi.appendChild(spanDates);
                 mainLi.appendChild(document.createElement('br'));
                 const hr = document.createElement('hr');
@@ -86,17 +83,17 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 const spanTimes = document.createElement('span');
                 spanTimes.classList.add('times');
                 if (!info.ended) {
-                    spanTimes.innerHTML = "🕓 " + info?.time || "18:00";
+                    spanTimes.textContent = "🕓 " + (info?.time || "18:00");
                     mainLi.appendChild(spanTimes);
                     mainLi.appendChild(document.createElement('br'));
                     const spanAdresses = document.createElement('span');
                     spanAdresses.classList.add('adresses');
-                    spanAdresses.innerHTML = "📌 " + info?.adress || "Leuven";
+                    spanAdresses.textContent = "📌 " + (info?.adress || "Leuven");
                     mainLi.appendChild(spanAdresses);
                     mainLi.appendChild(document.createElement('br'));
                     const spanPrices = document.createElement('span');
                     spanPrices.classList.add('prices');
-                    spanPrices.innerHTML = "€" + info?.price || 10;
+                    spanPrices.textContent = "€" + (info?.price || 10);
                     mainLi.appendChild(spanPrices);
                     mainLi.appendChild(document.createElement('br'));
                     const spanTickets = document.createElement('span');
@@ -110,7 +107,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     mainLi.appendChild(spanTickets);
                     mainLi.appendChild(document.createElement('br'));
                 } else {
-                    spanTimes.innerHTML = "🕓 " + JSON.parse(localStorage.getItem("key_langs"))[current_lang]["concertEndedText"] || "Ended";
+                    spanTimes.textContent = "🕓 " + (JSON.parse(localStorage.getItem("key_langs"))[current_lang]["concertEndedText"] || "Ended");
                     spanTimes.id = "concertEndedText";
                     mainLi.appendChild(spanTimes);
                     mainBox.style.opacity = 0.5;
@@ -121,13 +118,14 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 li.appendChild(img);
                 ol.appendChild(li);
                 mainBox.appendChild(ol);
-                document.querySelector(".swiper-concerts .swiper-wrapper").appendChild(mainBox);
+                const wrapper = document.querySelector(".swiper-concerts .swiper-wrapper");
+                if (wrapper) wrapper.appendChild(mainBox);
             });
 
             currentVConcerts = data["v"];
         }
 
-        try { localStorage.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
+        try { localStorage?.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
     } else if (type === "languages") {
         let data = dataPassed || await fetchData(type, from);
         let dataLang = data[current_lang];
@@ -138,13 +136,13 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 if (key === "concertEndedText") document.querySelectorAll("#concertEndedText").forEach(i => i.textContent = "🕓 " + dataLang[key]);
                 else {
                     let el = document.getElementById(key);
-                    if (el) el.innerHTML = dataLang[key];
+                    if (el) el.textContent = dataLang[key];
                     else console.warn(`Mrn: Element with id '${key}' not found in html.`);
                 }
             }
-            document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").innerHTML = dataLang.concertEndedText);
+            document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").textContent = dataLang.concertEndedText);
             if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 141);
-            try { localStorage.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
+            try { localStorage?.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVLangs = data["v"];
         }
     } else console.log(`Hey ChatGPT, fix this! (none or wrong 'type(=${type})' given in applyData)`);
@@ -152,7 +150,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
 }
 
 function changeLang(lang) {
-    current_lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : current_lang;
+    current_lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : default_lang;
     langChange = true;
     applyData("languages", JSON.parse(localStorage.getItem("key_langs")), "langChange");
     adjustBoxes();
@@ -166,7 +164,7 @@ NOTE: THIS IS ONLY ACTIVE ON THE WEBSITE
       .then(res => res.json())
       .then(data => console.log("Api counter success"))
       .catch(err => console.log("Api counter error", err));
-  }, 4000);
+  }, 7000);
 })();
 */
 
@@ -221,7 +219,7 @@ function adjustBoxes() {
 }
 
 //Shows an error message on (top of) the screen
-async function showErrorDiv(info) {
+function showErrorDiv(info) {
     if (allowError) {
         allowError = false;
         document.getElementById("errorMsg").removeAttribute("hidden");
@@ -304,7 +302,8 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
 
     dataPassed["add"].forEach(name => {
         //if you get an error on line below, its most likely because of name isnt complete or languages json if fucked up
-        if (document.getElementById(name.split("_")[1]).contains(document.querySelector(`li img[alt='${name.split("_")[0]}']`))) return;
+        const target = document.getElementById(name.split("_")[1]);
+        if (!target || target.contains(document.querySelector(`li img[alt='${name.split("_")[0]}']`))) return;
         console.log(`Mrn: for debugging: adding: ${name}`);
         const li = document.createElement("li");
         const img = document.createElement("img");
@@ -318,9 +317,11 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         li.appendChild(img);
         img.setAttribute("loading", "lazy");
         const h2 = document.createElement("h2");
-        h2.innerHTML = name.split("_")[0];
+        h2.textContent = name.split("_")[0];
         li.appendChild(h2);
-        document.getElementById(name.split("_")[1]).querySelector("ol").appendChild(li);
+        const targetOl = document.getElementById(name.split("_")[1]);
+        if (!targetOl) return;
+        targetOl.querySelector("ol").appendChild(li);
     });
     console.log("finished editing grupy");
 }
@@ -330,14 +331,11 @@ async function manualFetchCall() {//check this
     const buttonA = document.getElementById("manualFetch");
     buttonA.style.pointerEvents = 'none';
     buttonA.textContent = '...';
-    setTimeout(() => {
-        buttonA.style.pointerEvents = 'auto';
-        buttonA.textContent = JSON.parse(localStorage.getItem('key_langs'))[current_lang].manualFetch;
-    }, 3500);
     try {
         await applyData("languages", null, 'htmlCall');
         await applyData("koncertyInfo", null, 'htmlCall');
         buttonA.textContent = "✔️";
+        setTimeout(() => location.reload(), 2000);
     } catch (e) {
         buttonA.textContent = "❌";
         console.error("Mrn: manualFetchCall: fetch failed", e);
@@ -370,10 +368,10 @@ document.addEventListener("scroll", () => {
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
     //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
-    if (Date.now() - JSON.parse(localStorage.getItem("lastFetchDate")) >= (24 * 1000 * 60 * 60)) {
+    if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (24 * 1000 * 60 * 60)) {
         await applyData("languages", null, "fetch@dom");
         await applyData("koncertyInfo", null, "fetch@dom");
-        try { localStorage.setItem("fetchedLastTime", true); } catch (e) {/*nothing really*/ };
+        try { localStorage?.setItem("fetchedLastTime", true); } catch (e) { };
         location.reload();
     }
 
