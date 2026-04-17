@@ -19,6 +19,10 @@ body {
     overflow-x: hidden;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 img {
     border-radius: 15px;
     user-select: none;
@@ -40,17 +44,17 @@ hr {
 }
 
 ul {
-    margin: 14px -1px;
+    margin: 12px -1px;
     font-family: Kepler;
     list-style-type: none;
     display: flex;
-    gap: 10px;
+    gap: 2px;
     flex-direction: column;
 }
 
 ul li a {
     padding-left: 2px;
-    transition: background-color 0.45s ease
+    transition: background-color 0.45s ease;
 }
 
 ul li a:hover {
@@ -75,7 +79,7 @@ header {
     z-index: 2;
     overflow: hidden;
     position: fixed;
-    top: 2.5px;
+    top: 4px;
     left: 10px;
     transform-origin: top left;
 }
@@ -90,7 +94,7 @@ header {
 #polCant {
     z-index: 2;
     position: absolute;
-    top: -14px;
+    top: 2px;
     left: 75px;
     text-align: center;
     font-size: 2.2rem;
@@ -168,7 +172,7 @@ header {
 }
 
 #langBox a {
-    margin-left: -36.5px;
+    margin-left: -36px;
 }
 
 #pomocBoxTitle {
@@ -207,7 +211,7 @@ header {
     color: white;
     -webkit-text-stroke: 1px black;
     backdrop-filter: blur(4px);
-    top: 10px;
+    top: 4px;
 }
 
 .swiper {
@@ -218,9 +222,9 @@ header {
 .swiper-main {
     position: relative;
     width: 100%;
-    height: calc(100vh - 90px - 65px);
+    height: calc(100vh - 90px - 50px);
     overflow: hidden;
-    margin-top: -70px;
+    margin: -50px 0 -20px 0;
 }
 
 .swiper-slide {
@@ -240,8 +244,8 @@ header {
 }
 
 .swiper-slide img {
-    max-width: 95%;
-    max-height:  90%;
+    max-width: 100%;
+    max-height: 90%;
     width: auto;
     height: auto;
     display: block;
@@ -430,7 +434,7 @@ li a {
 .swiper-pics {
     position: relative;
     width: 100%;
-    height: 55vh;
+    height: 45vh;
     margin: 20px 0 5px 0;
 }
 
@@ -442,8 +446,8 @@ li a {
 }
 
 .swiper-pics .img-wrap {
-    height: calc(55vh - var(--galeria-caption-h)- 5px);
-    max-height: calc(55vh - var(--galeria-caption-h) - 5px);
+    height: calc(45vh - var(--galeria-caption-h) - 5px);
+    max-height: calc(45vh - var(--galeria-caption-h) - 5px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -644,6 +648,7 @@ footer {
     max-width: 100%;
     border: none;
     gap: 2vw;
+    left: 2%;
 }
 
 .links svg {
@@ -711,7 +716,7 @@ footer button {
     overflow-wrap: break-word;
 }
 
-#autor {
+#autor,#github {
     position: relative;
     font-size: clamp(0.8rem, 1.3vw, 1.3rem);
 }
@@ -720,11 +725,11 @@ footer button {
 
     #loremHead,
     #loremSub {
-        line-height: 28px;
+        line-height: 29px;
     }
 
     .logo {
-        top: 5px;
+        top: 8px;
         left: 10px;
     }
 
@@ -735,13 +740,13 @@ footer button {
     #polCant {
         left: 65px;
         font-size: 1.9rem;
-        top: -6px;
+        top: 8px;
     }
 }
 
 @media (max-width: 950px) {
     .but {
-        font-size: clamp(1.1rem, 2.4vw, 1.7rem);
+        font-size: clamp(1.1rem, 2.4vw, 1.6rem);
         align-items: end;
         color: white;
         border-color: white;
@@ -756,7 +761,7 @@ footer button {
         flex-direction: column-reverse;
         align-items: center;
         gap: 10px;
-        margin: 0 -13px 0 250px;
+        margin: 10px -13px 0 250px;
     }
 
     header {
@@ -767,7 +772,7 @@ footer button {
         left: 40%;
         max-width: 60vw;
         -webkit-text-stroke: 0px;
-        top: 120px;
+        top: 110px;
     }
 
     .swiper-main {
@@ -775,7 +780,7 @@ footer button {
     }
 
     #polCant {
-        top: -28px;
+        top: 8px;
         -webkit-text-stroke: 0px;
     }
 
@@ -826,7 +831,7 @@ footer button {
     #polCant {
         left: 60px;
         font-size: 1.8em;
-        top: -23px;
+        top: 5px;
     }
 
     .box {
@@ -923,9 +928,9 @@ footer button {
     }
 
     #polCant {
-        left: 45px;
+        left: 50px;
         font-size: 1.7rem;
-        top: -20px;
+        top: 4px;
     }
 
     #welcome {
