@@ -141,7 +141,7 @@
     },
     "ppl": {
         "add": [
-            "Paulina_alt"
+            "Paulina_alt", "Bert_tenor"
         ],
         "rm": [
             "DJ",
@@ -150,5 +150,5 @@
             "eda"
         ]
     },
-    "v": "2.5"
+    "v": "2.5b"
 }
