@@ -70,6 +70,24 @@ header {
     z-index: 2;
 }
 
+#trooper {
+    width: 55%;
+    left: 22.5%;
+    position: relative;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    background-color: rgb(255, 81, 81);
+    margin: 0;
+}
+
+#trooper a {
+    color: blue;
+    font-size: clamp(1.1rem, 1.9vw, 1.7rem);
+    text-decoration: underline;
+    font-weight: bold;
+}
+
 .titles {
     font-weight: bold;
     font-size: clamp(1.6rem, 3.4vw, 3rem);
@@ -198,7 +216,7 @@ header {
 }
 
 #welcome {
-    z-index: 1;
+    z-index: 2;
     position: relative;
     left: 50%;
     width: max-content;
@@ -716,7 +734,8 @@ footer button {
     overflow-wrap: break-word;
 }
 
-#autor,#github {
+#autor,
+#github {
     position: relative;
     font-size: clamp(0.8rem, 1.3vw, 1.3rem);
 }
@@ -766,6 +785,10 @@ footer button {
 
     header {
         height: 0;
+    }
+
+    #trooper {
+        height: 27px;
     }
 
     #welcome {
@@ -819,6 +842,14 @@ footer button {
 }
 
 @media (max-width: 768px) {
+
+    #trooper {
+        position: relative;
+        top: 80px;
+        left: 2%;
+        height: 42px;
+    }
+
     .logo {
         top: 5px;
         left: 6px;
@@ -886,7 +917,7 @@ footer button {
 
 @media (max-width: 650px) {
     #welcome {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         transform: translate(-50%, -25%);
     }
 
@@ -918,6 +949,10 @@ footer button {
         background-color: red;
     }
 
+    #trooper {
+        top: 75px;
+    }
+
     .logo {
         top: 5px;
         left: 5px;
@@ -935,7 +970,7 @@ footer button {
 
     #welcome {
         left: 31%;
-        top: 85px;
+        top: 75px;
         backdrop-filter: none;
     }
 
@@ -945,6 +980,12 @@ footer button {
 
     .box {
         margin-top: 60px;
+    }
+
+    #boxONas-outer {
+        position: relative;
+        z-index: 2;
+        margin-top: -200px
     }
 
     #boxONas-inner .right {
