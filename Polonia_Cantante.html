@@ -629,15 +629,13 @@
                     disableOnInteraction: false
                 }
             });
-
-            const initSlide = Number(getComputedStyle(document.documentElement).getPropertyValue('--initSlide')) || 3;
-
+
             const swiperConcerts = new Swiper('.swiper-concerts', {
                 freeMode: true,
                 slidesPerView: 1.5,
                 spaceBetween: 15,
                 centeredSlides: true,
-                initialSlide: initSlide,
+                initialSlide: 3,
                 navigation: {
                     nextEl: '.swiper-button-next.concerts',
                     prevEl: '.swiper-button-prev.concerts',
