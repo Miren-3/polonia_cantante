@@ -1,5 +1,4 @@
 {
-    "initSlide": 3,
     "concerts": [
         {
             "date": "11-2025",
@@ -30,9 +29,9 @@
             "time": "17:00",
             "adress": "Blanden, Haasrodestraat 72",
             "price": "10",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/03/56e6ffbb-1-scaled.png",
+            "src": "https://poloniacantante.org/wp-content/uploads/2026/04/Polonia-Cantante-13-06-2026--scaled.jpg",
             "ended": false
         }
     ],
-    "v": "1.4"
+    "v": "1.4b"
 }
