@@ -12,11 +12,10 @@
 
 <body>
     <header>
-        <nav id="navBar"> <!--nav bar ig?-->
+        <nav id="navBar">
             <button id="oNas" onclick="scrollToId('boxONas-outer')" class="but">O nas</button>
             <button id="koncerty" onclick="scrollToId('boxKoncerty')" class="but">Koncerty & Bilety</button>
             <button id="zdjecia" onclick="scrollToId('boxGaleria')" class="but">Zdjęcia</button>
-            <!--<button id="proby" onclick="scrollToId('boxProby')" class="but">Próby</button>-->
             <button id="pomoc" onclick="toggleBox('pomocBox')" class="but">Wspomóż nas</button>
             <button id="dolacz" onclick="toggleBox('contactInfoBox')" class="but">Dołącz do nas</button>
             <button id="lang" onclick="toggleBox('langBox')" class="svgNav">
@@ -554,7 +553,6 @@
         </div>
 
         <div class="footer-right">
-            © &middot; 2026
             <br>
             <a id="manualFetch" onclick="manualFetchCall();">Chcesz sprawdzic czy informacje na stronie sa aktualne?
                 Nacisnij mnie!</a>
@@ -566,9 +564,11 @@
             <span id="autor">
                 Strona zrobiona przez Bernard Kutrzeba-Kotowski</span>
             <br>
+            © &middot; 2026
+            <br>
             <a href="https://www.github.com/Miren-3" target="_blank" id="github">strona na github.com/Miren-3</a>
             <br>
-            v: 1.1.6.5
+            v: 1.1.6.6
         </div>
     </footer>
     <script type="module">
@@ -629,13 +629,15 @@
                     disableOnInteraction: false
                 }
             });
-            
+
+            const initSlide = Number(getComputedStyle(document.documentElement).getPropertyValue('--initSlide')) || 3;
+
             const swiperConcerts = new Swiper('.swiper-concerts', {
                 freeMode: true,
                 slidesPerView: 1.5,
                 spaceBetween: 15,
                 centeredSlides: true,
-                initialSlide: 3,
+                initialSlide: initSlide,
                 navigation: {
                     nextEl: '.swiper-button-next.concerts',
                     prevEl: '.swiper-button-prev.concerts',

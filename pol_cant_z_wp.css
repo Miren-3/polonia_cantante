@@ -229,7 +229,7 @@ header {
     color: white;
     -webkit-text-stroke: 1px black;
     backdrop-filter: blur(4px);
-    top: 4px;
+    top: 2px;
 }
 
 .swiper {
