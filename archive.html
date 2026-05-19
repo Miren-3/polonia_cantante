@@ -226,59 +226,66 @@
     </main>
 
     <script>
-        const data = {
+                const dataArchive = {
             "concerts": [
                 {
                     "date": "25/1/2026",
-                    "img": "pics/koncerty/wosp26.jpeg"
+                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/wosp26.jpeg"
                 },
                 {
                     "date": "12/2025",
-                    "img": "pics/karta1.jpeg"
+                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta1.jpeg"
                 },
                 {
                     "date": "11/2025",
-                    "img": "pics/karta2.jpeg"
+                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta2.jpeg"
                 },
                 {
-                    "date": "",
+                    "date": "9/2025",
+					"vidSrc": "https://poloniacantante.org/wp-content/uploads/2026/05/VID-20250926-WA0018.mp4"
                 },
                 {
                     "date": "",
                 }
             ]
         };
-        const concert = document.querySelectorAll(".concert");
-        let ludzi = " ludzi przyszło";
 
-        function applyData() {
-            data.concerts.forEach((info, i) => {
+        const concertArchive = document.querySelectorAll(".concert");
+        function applyDataArchive() {
+            dataArchive.concerts.forEach((info, i) => {
                 //you know what to do here, make divs seperately
-                const section = concert[i];
+                const section = concertArchive[i];
                 if (!section) return;
-
-                section.querySelector(".date").innerHTML = "📅 " + info?.date;
-                section.querySelector("img").src = info?.img;
+                section.querySelector(".date").textContent = "📅 " + info?.date;
+                if (info.img !== undefined) section.querySelector("img").src = info.img;
+				if (info.vidSrc !== undefined) {
+				section.querySelector("img").remove();
+				const video = document.createElement('video');
+				video.preload = "metadata";
+                video.controls = true;
+				video.muted = false;
+				video.src = info?.vidSrc;
+				section.querySelector('.wrap').appendChild(video);
+			}
             });
         }
 
-        function language(lang) {
-            lang = lang.toUpperCase().trim();
-            const h1 = document.querySelector("h1");
+        function languageArchive(lang) {
+			lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
+            const h1 = document.getElementById("archiveh1");
             switch (lang) {
-                case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; ludzi = " ludzi przyszło"; break;
-                case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; ludzi = " mensen kwamen"; break;
-                case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; ludzi = " listeners came"; break;
-                case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; ludzi = " personnes sont venues"; break;
+                case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;
+                case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; break;
+                case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; break;
+                case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
                 default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
             }
-            applyData();
+            applyDataArchive();
         }
-
-        language("PL");
+        languageArchive("PL");
 
         //toggle navBoxes visibility when one of them is opened
-        function toggleBox() {
+        function toggleBoxArchive() {
             const box = document.getElementById("langBox");
             if (box.hasAttribute("hidden")) {
                 box.removeAttribute("hidden");
@@ -289,16 +296,15 @@
             }
         }
 
-        function adjustBoxes() {
+        function adjustBoxesArchive() {
             const box = document.getElementById("langBox");
             const buttonPos = document.getElementById("lang").getBoundingClientRect();
             const boxPos = box.getBoundingClientRect();
-            const scrollY = 0 ?? (window.scrollY || document.documentElement.scrollTop);
+            const scrollY = 0;// ?? (window.scrollY || document.documentElement.scrollTop);
 
             //Adjust the navBoxes positions
-
             box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
-            box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
+            box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 15}px`;
 
             //Adjust svg position
             const newBoxPos = box.getBoundingClientRect();
@@ -314,9 +320,8 @@
             box.style.opacity = 0;
         }
 
-        requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-
-        window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxes(); });
+        requestAnimationFrame(() => adjustBoxesArchive()); //first navBoxes adjustement, right after load
+        window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxesArchive(); });
     </script>
 </body>
 
