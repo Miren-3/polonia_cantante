@@ -136,10 +136,12 @@
             margin: 0;
         }
 
-        .wrap img {
+        .wrap img,
+        .wrap video {
             margin-inline: auto;
             width: auto;
             max-width: 40vw;
+            max-height: 65vh;
             object-fit: contain;
             object-position: center;
             display: block;
@@ -226,8 +228,12 @@
     </main>
 
     <script>
-                const dataArchive = {
+        const dataArchive = {
             "concerts": [
+                {
+                    "date": "6/2025",
+                    "img": "https://poloniacantante.org/wp-content/uploads/2026/04/Polonia-Cantante-13-06-2026--scaled.jpg"
+                },
                 {
                     "date": "25/1/2026",
                     "img": "https://poloniacantante.org/wp-content/uploads/2026/02/wosp26.jpeg"
@@ -242,10 +248,7 @@
                 },
                 {
                     "date": "9/2025",
-					"vidSrc": "https://poloniacantante.org/wp-content/uploads/2026/05/VID-20250926-WA0018.mp4"
-                },
-                {
-                    "date": "",
+                    "vidSrc": "https://poloniacantante.org/wp-content/uploads/2026/05/VID-20250926-WA0018.mp4"
                 }
             ]
         };
@@ -258,20 +261,20 @@
                 if (!section) return;
                 section.querySelector(".date").textContent = "📅 " + info?.date;
                 if (info.img !== undefined) section.querySelector("img").src = info.img;
-				if (info.vidSrc !== undefined) {
-				section.querySelector("img").remove();
-				const video = document.createElement('video');
-				video.preload = "metadata";
-                video.controls = true;
-				video.muted = false;
-				video.src = info?.vidSrc;
-				section.querySelector('.wrap').appendChild(video);
-			}
+                if (info.vidSrc !== undefined) {
+                    section.querySelector("img").remove();
+                    const video = document.createElement('video');
+                    video.preload = "metadata";
+                    video.controls = true;
+                    video.muted = false;
+                    video.src = info?.vidSrc;
+                    section.querySelector('.wrap').appendChild(video);
+                }
             });
         }
 
         function languageArchive(lang) {
-			lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
+            lang = /FR|EN|NL|PL/.test(lang.toUpperCase().trim()) ? lang.toUpperCase().trim() : 'EN';
             const h1 = document.getElementById("archiveh1");
             switch (lang) {
                 case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;

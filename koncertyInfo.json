@@ -30,8 +30,8 @@
             "adress": "Blanden, Haasrodestraat 72",
             "price": "10",
             "src": "https://poloniacantante.org/wp-content/uploads/2026/04/Polonia-Cantante-13-06-2026--scaled.jpg",
-            "ended": false
+            "ended": true
         }
     ],
-    "v": "1.4b"
+    "v": "1.5"
 }
