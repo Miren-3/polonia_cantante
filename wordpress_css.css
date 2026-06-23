@@ -234,7 +234,7 @@ header {
 }
 
 #welcome {
-    z-index: 2;
+    z-index: 1;
     position: relative;
     left: 50%;
     width: max-content;
@@ -246,7 +246,7 @@ header {
     text-align: center;
     color: white;
     -webkit-text-stroke: 1px black;
-    backdrop-filter: blur(4px);
+    /*backdrop-filter: blur(4px);*/
     top: 2px;
 }
 
