@@ -14,7 +14,7 @@
         "contactTitle": "Kontakt z nami:",
         "loremHead": "Polonia Cantante to pełen entuzjazmu polski chór amatorski z Leuven, który od 2019 roku spotyka się, aby dzielić się miłością do muzyki i radością wspólnego śpiewania. Nasz repertuar jest tak różnorodny, jak nasi członkowie.",
         "loremSub": "Zapraszamy na nasze koncerty!",
-        "koncertTitle": "Koncerty sezon '25/'26",
+        "koncertTitle": "Koncerty sezon '26/'27",
         "bilet": "> Bilety <",
         "archive": "Archiwum koncertów",
         "probyTitle": "Próby",
@@ -49,7 +49,7 @@
         "contactTitle": "Contact us:",
         "loremHead": "Polonia Cantante is an enthusiastic Polish amateur choir from Leuven that has been meeting since 2019 to share a love of music and the joy of singing together. Our repertoire is as diverse as our members.",
         "loremSub": "Join us for our concerts!",
-        "koncertTitle": "Concert season '25/'26",
+        "koncertTitle": "Concert season '26/'27",
         "bilet": "> Tickets <",
         "archive": "Archive of concerts",
         "probyTitle": "Rehearsals",
@@ -84,7 +84,7 @@
         "contactTitle": "Contactez-nous:",
         "loremHead": "Polonia Cantante est un chœur amateur polonais enthousiaste de Louvain qui se réunit depuis 2019 pour partager l’amour de la musique et la joie de chanter ensemble. Notre répertoire est aussi varié que nos membres.",
         "loremSub": "Nous vous invitons à nos concerts !",
-        "koncertTitle": "Concerts saison '25/'26",
+        "koncertTitle": "Concerts saison '26/'27",
         "bilet": "> Billets <",
         "archive": "Archive de concerts",
         "probyTitle": "Répétitions",
@@ -119,7 +119,7 @@
         "contactTitle": "Contact met ons:",
         "loremHead": "Polonia Cantante is een enthousiast Pools amateurkoor uit Leuven dat sinds 2019 samenkomt om de liefde voor muziek en het plezier van samen zingen te delen. Ons repertoire is net zo divers als onze leden.",
         "loremSub": "Kom naar onze concerten!",
-        "koncertTitle": "Concerten seizoen '25/'26",
+        "koncertTitle": "Concerten seizoen '26/'27",
         "bilet": "> Tickets <",
         "archive": "Archief van concerten",
         "probyTitle": "Repetities",
@@ -141,7 +141,7 @@
     },
     "ppl": {
         "add": [
-            "Paulina_alt", "Bert_tenor"
+            "Paulina_alt", "Bernard_tenor"
         ],
         "rm": [
             "DJ",
@@ -149,5 +149,5 @@
             "eda"
         ]
     },
-    "v": "2.6"
+    "v": "2.6b"
 }

@@ -154,6 +154,24 @@ header {
     transition: opacity 0.5s;
 }
 
+#pomocBox {
+    opacity: 0;
+    padding: 1.8vh 10px;
+    text-align: center;
+}
+
+#langBox {
+    font-size: clamp(1.35rem, 1.9vw, 1.9rem);
+    opacity: 0;
+    padding: 0 10px;
+}
+
+#contactInfoBox {
+    opacity: 0;
+    padding: 1.7vh 8px;
+    text-align: center;
+}
+
 .but {
     cursor: pointer;
     background-color: transparent;
@@ -296,6 +314,7 @@ header {
     height: auto;
     text-align: center;
     background-color: white;
+    padding: 15px 0;
 }
 
 #boxONas-inner {
