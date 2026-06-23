@@ -19,6 +19,7 @@ console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ?
 (async () => {
     for (let key of ["key_langs", "key_concerts"]) {
         const cached = localStorage.getItem(key);
+
         if (cached) {
             const data = JSON.parse(cached);
             //passes data to applying function
@@ -38,8 +39,10 @@ console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ?
 
 async function fetchData(type, from) {//fetch jsons? lol
     console.log(`fetching data: ${type}...`, from);
+
     try {
         const fetched = await fetch(`https://raw.githubusercontent.com/Miren-3/polonia_cantante/refs/heads/main/${type}.json`);
+
         if (!fetched.ok) {
             showErrorDiv(`fetchData ${type}.json`);
             throw new Error(`Mrn: Fetch failed in datafetch ${type}.json`);
@@ -48,6 +51,7 @@ async function fetchData(type, from) {//fetch jsons? lol
         try { localStorage?.setItem("lastFetchDate", JSON.stringify(Date.now())); } catch (e) { console.error(e); }
         console.info(`finished fetching ${type}`, from); //kind of misleading but who cares really?
         return await fetched.json();
+
     } catch (err) {
         showErrorDiv(`fetchData ${type}.json`);
         //console.error(`Mrn: Wrong link in datafetch ${type}.json`, err, from);
@@ -60,9 +64,9 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
     //if (!first) window.reload(); //to confirm later
     const data = dataPassed || await fetchData(type, from);
     if (type === "koncertyInfo") {
+
         if (data["v"] !== currentVConcerts && first) { //if version is different, or first load, need to recheck
             first = false;
-            document.documentElement.style.setProperty('--initSlide', data.initSlide);
             data.concerts.forEach((info, i) => {
                 const mainBox = document.createElement('div');
                 mainBox.classList.add('swiper-slide');
@@ -82,6 +86,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 mainLi.appendChild(hr);
                 const spanTimes = document.createElement('span');
                 spanTimes.classList.add('times');
+
                 if (!info.ended) {
                     spanTimes.textContent = "🕓 " + (info?.time || "18:00");
                     mainLi.appendChild(spanTimes);
@@ -101,7 +106,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     const a = document.createElement('a');
                     a.classList.add('ticket');
                     a.textContent = JSON.parse(localStorage.getItem("key_langs"))[current_lang]["bilet"] || "Ticket";
-                    a.href = "bilety.html" || "#";
+                    a.href = "https://poloniacantante.org/index.php/tickets" || "#";
                     a.target = "_blank";
                     spanTickets.appendChild(a);
                     mainLi.appendChild(spanTickets);
@@ -112,6 +117,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     mainLi.appendChild(spanTimes);
                     mainBox.style.opacity = 0.5;
                 }
+
                 ol.appendChild(mainLi);
                 const img = document.createElement('img');
                 img.src = info?.src || "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced.jpg";
@@ -119,6 +125,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                 ol.appendChild(li);
                 mainBox.appendChild(ol);
                 const wrapper = document.querySelector(".swiper-concerts .swiper-wrapper");
+
                 if (wrapper) wrapper.appendChild(mainBox);
             });
 
@@ -126,11 +133,14 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
         }
 
         try { localStorage?.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
+
     } else if (type === "languages") {
         let data = dataPassed || await fetchData(type, from);
         let dataLang = data[current_lang];
+
         if (data["v"] !== currentVLangs || langChange) { //if version is different or language changed
             langChange = false;
+
             for (let key in dataLang) {
                 if (key === "bilet") document.querySelectorAll(".ticket").forEach(i => i.textContent = dataLang[key]);
                 if (key === "concertEndedText") document.querySelectorAll("#concertEndedText").forEach(i => i.textContent = "🕓 " + dataLang[key]);
@@ -140,13 +150,16 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     else console.warn(`Mrn: Element with id '${key}' not found in html.`);
                 }
             }
+
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").textContent = dataLang.concertEndedText);
             if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 141);
             try { localStorage?.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVLangs = data["v"];
         }
+
     } else console.log(`Hey ChatGPT, fix this! (none or wrong 'type(=${type})' given in applyData)`);
-    console.log(`done applying ${type}!!1!1 ver updated: ` + ((type === "languages" ? currentVLangs : currentVConcerts) === data['v'] ? false : true));
+
+    console.log(`done applying ${type}!!1!1 (deprecated: ver updated: ${((type === "languages" ? currentVLangs : currentVConcerts) === data['v'] ? false : true)})`);
 }
 
 function changeLang(lang) {
@@ -156,19 +169,7 @@ function changeLang(lang) {
     adjustBoxes();
 }
 
-/*increments a counter through api to count how many people opened the website
-NOTE: THIS IS ONLY ACTIVE ON THE WEBSITE
-(function () {
-  setTimeout(() => {
-    fetch("https://api.counterapi.dev/v2/mirens-team-3096/page-views-pol-cant/up")
-      .then(res => res.json())
-      .then(data => console.log("Api counter success"))
-      .catch(err => console.log("Api counter error", err));
-  }, 7000);
-})();
-*/
-
-function adjustBoxes() {
+function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because it depends on window width 
     for (let helpBox of ["langBox", "contactInfoBox", "pomocBox"]) {
         const box = document.getElementById(helpBox);
         const buttonPos = helpBox === 'langBox' ? document.getElementById("lang").getBoundingClientRect() : (helpBox === "contactInfoBox" ? document.getElementById("dolacz").getBoundingClientRect() : document.getElementById("pomoc").getBoundingClientRect());
@@ -187,6 +188,7 @@ function adjustBoxes() {
                 //old code for helpBox: box.style.top = `${buttonPos.top / 2 + scrollY / 2}px`;
                 box.style.top = `${buttonPos.top + scrollY - buttonPos.height / 2}px`;
             }
+
         } else {
             box.style.left = `${(buttonPos.left + buttonPos.width / 2) - (boxPos.width / 2)}px`;
             box.style.top = `${buttonPos.top + scrollY + buttonPos.height + 35}px`;
@@ -197,6 +199,7 @@ function adjustBoxes() {
         const svg = box.querySelector("svg");
         if (!svg) continue;
         const polygon = svg.querySelector("polygon");
+
         if (window.innerWidth < 950) {
             document.querySelector(".svgNav svg").setAttribute("fill", "#ffffff");
             polygon.setAttribute("points", "20,10 0,0 0,20");
@@ -232,21 +235,18 @@ setTimeout(() => {
     document.querySelectorAll("#boxGrupy li img").forEach(img => {
         img.parentElement.setAttribute("id", img.alt.toLowerCase().trim());
         img.onerror = function () {
-            if (!this.src.includes("default.jpg")) {
-                this.src = "pics/headshot/default.jpg";
-            }
+            if (!this.src.includes("default.jpg")) this.src = "https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg";
         };
+
         // if its already broken
-        if (img.complete && img.naturalWidth === 0) {
-            img.src = "pics/headshot/default.jpg";
-        }
+        if (img.complete && img.naturalWidth === 0) img.src = "https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg";
     });
 }, 2000);
 
 function changeJoinColor(type) {
     const text = document.getElementById(`text${type}`);
     const textA = document.getElementById(`textA${type}`);
-    if (text.style.color == "white") {
+    if (text.style.color === "white") {
         text.style.color = "black";
         textA.style.color = "red";
     } else {
@@ -281,8 +281,10 @@ function toggleBox(id) {
                         setTimeout(() => box.style.opacity = 0, 10);
                     }
                 };
+
                 document.addEventListener('click', rmBoxHandler);
             }, 10);
+
             setTimeout(() => box.style.opacity = 1, 10);
         } else {
             box.style.pointerEvents = 'none';
@@ -310,14 +312,12 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         img.setAttribute("alt", name.split("_")[0]);
         img.onerror = function () { this.src = 'https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg'; }; //if no image found in files
         img.src = `https://poloniacantante.org/wp-content/uploads/2026/03/${name.split("_")[0].trim()}.png`;
-        /*old code:
-        img.onerror = function () { this.src = 'pics/headshot/default.jpg'; }; //if no image found in files
-        img.src = `pics/headshot/${name.split("_")[0].toLowerCase().trim()}.png`;
-        */
-        li.appendChild(img);
         img.setAttribute("loading", "lazy");
+        li.appendChild(img);
+        const p = document.createElement("p");
+        li.appendChild(p);
         const h2 = document.createElement("h2");
-        h2.textContent = name.split("_")[0];
+        h2.innerHTML = name.split("_")[0];
         li.appendChild(h2);
         const targetOl = document.getElementById(name.split("_")[1]);
         if (!targetOl) return;
@@ -331,6 +331,7 @@ async function manualFetchCall() {//check this
     const buttonA = document.getElementById("manualFetch");
     buttonA.style.pointerEvents = 'none';
     buttonA.textContent = '...';
+
     try {
         await applyData("languages", null, 'htmlCall');
         await applyData("koncertyInfo", null, 'htmlCall');
@@ -371,7 +372,7 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
     if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (24 * 1000 * 60 * 60)) {
         await applyData("languages", null, "fetch@dom");
         await applyData("koncertyInfo", null, "fetch@dom");
-        try { localStorage?.setItem("fetchedLastTime", true); } catch (e) { };
+        try { localStorage?.setItem("fetchedLastTime", true); } catch (e) {/*nothing lol*/ };
         location.reload();
     }
 
@@ -400,5 +401,15 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
         });
     });
 });
+
+document.getElementById("dolaczSeperateProby").onclick = () => changeJoinColor("Proby");
+document.getElementById("dolaczSeperateGrupy").onclick = () => changeJoinColor("Grupy");
+document.getElementById("manualFetch").onclick = () => manualFetchCall();
+document.getElementById("oNas").onclick = () => scrollToId('boxONas-outer');
+document.getElementById("koncerty").onclick = () => scrollToId('boxKoncerty');
+document.getElementById("zdjecia").onclick = () => scrollToId('boxGaleria');
+document.getElementById("pomoc").onclick = () => toggleBox('pomocBox');
+document.getElementById("dolacz").onclick = () => toggleBox('contactInfoBox');
+document.getElementById("lang").onclick = () => toggleBox('langBox');
 
 console.log("%c Hello! watch'ya doing here?\nuh wanna manage the website for me (for free ofc cuz im a minor)? message me with the error report button :3", 'background: #222; color: #bada55; font-size: 18px;');

@@ -13,12 +13,12 @@
 <body>
     <header>
         <nav id="navBar">
-            <button id="oNas" onclick="scrollToId('boxONas-outer')" class="but">O nas</button>
-            <button id="koncerty" onclick="scrollToId('boxKoncerty')" class="but">Koncerty & Bilety</button>
-            <button id="zdjecia" onclick="scrollToId('boxGaleria')" class="but">Zdjęcia</button>
-            <button id="pomoc" onclick="toggleBox('pomocBox')" class="but">Wspomóż nas</button>
-            <button id="dolacz" onclick="toggleBox('contactInfoBox')" class="but">Dołącz do nas</button>
-            <button id="lang" onclick="toggleBox('langBox')" class="svgNav">
+            <button id="oNas" class="but">O nas</button>
+            <button id="koncerty" class="but">Koncerty & Bilety</button>
+            <button id="zdjecia" class="but">Zdjęcia</button>
+            <button id="pomoc" class="but">Wspomóż nas</button>
+            <button id="dolacz" class="but">Dołącz do nas</button>
+            <button id="lang" class="svgNav">
                 <svg fill="#000000" height="200px" width="200px" viewBox="0 0 24 24">
                     <path
                         d="M12,24C5.4,24,0,18.6,0,12S5.4,0,12,0s12,5.4,12,12S18.6,24,12,24z M9.5,17c0.6,3.1,1.7,5,2.5,5s1.9-1.9,2.5-5H9.5z M16.6,17c-0.3,1.7-0.8,3.3-1.4,4.5c2.3-0.8,4.3-2.4,5.5-4.5H16.6z M3.3,17c1.2,2.1,3.2,3.7,5.5,4.5c-0.6-1.2-1.1-2.8-1.4-4.5H3.3 z M16.9,15h4.7c0.2-0.9,0.4-2,0.4-3s-0.2-2.1-0.5-3h-4.7c0.2,1,0.2,2,0.2,3S17,14,16.9,15z M9.2,15h5.7c0.1-0.9,0.2-1.9,0.2-3 S15,9.9,14.9,9H9.2C9.1,9.9,9,10.9,9,12C9,13.1,9.1,14.1,9.2,15z M2.5,15h4.7c-0.1-1-0.1-2-0.1-3s0-2,0.1-3H2.5C2.2,9.9,2,11,2,12 S2.2,14.1,2.5,15z M16.6,7h4.1c-1.2-2.1-3.2-3.7-5.5-4.5C15.8,3.7,16.3,5.3,16.6,7z M9.5,7h5.1c-0.6-3.1-1.7-5-2.5-5 C11.3,2,10.1,3.9,9.5,7z M3.3,7h4.1c0.3-1.7,0.8-3.3,1.4-4.5C6.5,3.3,4.6,4.9,3.3,7z">
@@ -28,7 +28,7 @@
         </nav>
 
         <div id="navBoxes"> <!--navigation boxes with extra information-->
-            <div id="pomocBox" class="navBox" style="opacity: 0; padding: 1.8vh 10px; text-align: center;">
+            <div id="pomocBox" class="navBox">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
@@ -37,7 +37,7 @@
                 <span style="padding-top: 0.3em;">&middot; BE49 7380 5242 3771</span>
             </div>
 
-            <div id="contactInfoBox" class="navBox" style="opacity: 0; padding: 1.7vh 8px; text-align: center;">
+            <div id="contactInfoBox" class="navBox">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
@@ -48,12 +48,11 @@
                 /
                 <br>
                 <a style="margin: 0 2px; color: red; border: 2px solid black; border-radius: 10px;"
-                    href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a)bym dołączyć do waszego chóru">
+                    href="mailto:PoloniaCantante@gmail.com?subject=Chciał(a) bym dołączyć do waszego chóru">
                     &middot; PoloniaCantante@gmail.com</a>
             </div>
 
-            <div id="langBox" class="navBox"
-                style="font-size: clamp(1.35rem, 1.9vw, 1.9rem); opacity: 0; transition: opacity 0.5s; padding: 0 10px;">
+            <div id="langBox" class="navBox">
                 <svg width="30" height="20" style="position: absolute;">
                     <polygon points="15,0 0,20 30,20" fill="rgb(196, 196, 196)" />
                 </svg>
@@ -67,51 +66,44 @@
         </div>
 
         <div class="logo">
-            <img src='pics/logoPCtrans.png'>
+            <img src='https://poloniacantante.org/wp-content/uploads/2026/02/logoPCtrans.png'>
         </div>
 
         <h2 id="polCant">Polonia<br>Cantante</h2>
     </header>
 
-    <div id="errorMsg" hidden>Whoops! Coś się zesrało xDD</div>
-
     <div id="trooper"><a href="https://www.trooper.be/nl/trooperverenigingen/polonia-cantante/">Nasze (/ Onze / Our /
             Notre) www.trooper.be!</a></div>
 
-    <!--<div id="welcomeDiv">  </div>-->
+    <div id="errorMsg" hidden>Whoops! Coś się wypierdzieliło xDD</div>
+
     <h1 id="welcome">Witamy na stronie Polonia Cantante!</h1>
 
-    <!-- Swiper main container -->
     <div class="swiper swiper-main">
-        <!-- Additional required wrapper -->
         <div class="swiper-wrapper">
-            <!-- Slides -->
             <div class="swiper-slide">
-                <div class="wrap"> <img src="pics/koncerty/koncert2.jpeg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/620251.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/koncerty/wosp26.jpeg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/620254.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/koncerty/koncert6.jpeg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/620257.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/pic2.jpg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/620258.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/koncerty/koncert18.jpeg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/620259.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/koncerty/koncert12.jpeg"></div>
+                <div class="wrap"><img src=https://poloniacantante.org/wp-content/uploads/2026/06/6202511.jpeg"></div>
             </div>
             <div class="swiper-slide">
-                <div class="wrap"><img src="pics/wszyscy2.jpg"></div>
-            </div>
-            <div class="swiper-slide">
-                <div class="wrap"><img src="pics/koncerty/koncert17.jpeg"></div>
+                <div class="wrap"><img src="https://poloniacantante.org/wp-content/uploads/2026/06/6202515.jpeg"></div>
             </div>
         </div>
-        <!-- navigation buttons -->
+
         <div class="swiper-button-prev main"></div>
         <div class="swiper-button-next main"></div>
     </div>
