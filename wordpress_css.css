@@ -71,14 +71,18 @@ header {
 }
 
 #trooper {
-    width: 55%;
-    left: 22.5%;
-    position: relative;
-    height: 30px;
-    border-radius: 15px;
+    width: auto;
+    left: 10px;
+    position: fixed;
+    top: 80px;
+    height: auto;
+    border-radius: 20px;
     text-align: center;
-    background-color: rgb(255, 81, 81);
-    margin: 0;
+    background-color: rgb(250, 250, 250);
+    align-content: center;
+    z-index: 3;
+    padding: 10px 5px;
+    box-shadow: 0 0 25px grey
 }
 
 #trooper a {
@@ -131,7 +135,7 @@ header {
     gap: clamp(10px, 1.5vw, 20px);
     right: 20px;
     margin-inline: auto;
-    margin: 22px 10px 0 250px;
+    margin: 23px 10px 0 250px;
     align-items: center;
     justify-content: center;
     align-content: center;
@@ -241,12 +245,11 @@ header {
     max-width: 80vw;
     transform: translate(-50%, -50%);
     font-size: clamp(1.9rem, 3.5vw, 3.2rem);
-    font-family: monospace;
     font-weight: bold;
     text-align: center;
     color: white;
-    -webkit-text-stroke: 1px black;
-    /*backdrop-filter: blur(4px);*/
+    -webkit-text-stroke: 1.5px black;
+    /*backdrop-filter: blur(3px);*/
     top: 2px;
 }
 
@@ -260,14 +263,13 @@ header {
     width: 100%;
     height: calc(100vh - 90px - 50px);
     overflow: hidden;
-    margin: -50px 0 -20px 0;
+    margin: -40px 0 -20px 0;
 }
 
 .swiper-slide {
     width: 100%;
     height: 100%;
     display: grid;
-    place-items: center;
     overflow: hidden;
 }
 
@@ -280,11 +282,12 @@ header {
 }
 
 .swiper-slide img {
-    max-width: 100%;
+    max-width: 95%;
     max-height: 90%;
     width: auto;
     height: auto;
     display: block;
+    /*object-fit: contain;*/
 }
 
 .left {
@@ -806,10 +809,6 @@ footer button {
         height: 0;
     }
 
-    #trooper {
-        height: 27px;
-    }
-
     #welcome {
         left: 40%;
         max-width: 60vw;
@@ -861,14 +860,6 @@ footer button {
 }
 
 @media (max-width: 768px) {
-
-    #trooper {
-        position: relative;
-        top: 80px;
-        left: 2%;
-        height: 42px;
-    }
-
     .logo {
         top: 5px;
         left: 6px;
@@ -953,6 +944,10 @@ footer button {
         width: 65%;
         max-height: 170px;
     }
+
+    #trooper {
+        visibility: hidden;
+    }
 }
 
 @media (max-width: 480px) {
@@ -966,10 +961,6 @@ footer button {
 
     .svgNav svg {
         background-color: red;
-    }
-
-    #trooper {
-        top: 75px;
     }
 
     .logo {
@@ -989,12 +980,12 @@ footer button {
 
     #welcome {
         left: 31%;
-        top: 75px;
+        top: 90px;
         backdrop-filter: none;
     }
 
     .swiper-main {
-        margin-top: 6vh;
+        margin-top: 2vh;
     }
 
     .box {
