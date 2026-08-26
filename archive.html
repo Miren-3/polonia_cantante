@@ -232,23 +232,23 @@
             "concerts": [
                 {
                     "date": "6/2025",
-                    "img": "https://poloniacantante.org/wp-content/uploads/2026/04/Polonia-Cantante-13-06-2026--scaled.jpg"
+                    "img": "https://poloniacantante.org/polonia-cantante-13-06-2026/"
                 },
                 {
-                    "date": "25/1/2026",
-                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/wosp26.jpeg"
+                    "date": "1/2026",
+                    "img": "https://poloniacantante.org/wosp26"
                 },
                 {
                     "date": "12/2025",
-                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta1.jpeg"
+                    "img": "https://poloniacantante.org/karta1"
                 },
                 {
                     "date": "11/2025",
-                    "img": "https://poloniacantante.org/wp-content/uploads/2026/02/karta2.jpeg"
+                    "img": "https://poloniacantante.org/karta2"
                 },
                 {
                     "date": "9/2025",
-                    "vidSrc": "https://poloniacantante.org/wp-content/uploads/2026/05/VID-20250926-WA0018.mp4"
+                    "vidSrc": "https://poloniacantante.org/vid-20250926-wa0018"
                 }
             ]
         };
@@ -279,12 +279,12 @@
             switch (lang) {
                 case "PL": h1.innerHTML = "Witamy w archiwum naszych koncertów!<br>Tutaj znajdziesz wszystkie nasze poprzednie koncerty."; break;
                 case "NL": h1.innerHTML = "Welkom in het archief van onze koncerten!<br>Hier vindt u al onze vroegere koncerten."; break;
-                case "EN": h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts."; break;
                 case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
                 default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
             }
             applyDataArchive();
         }
+        
         languageArchive("PL");
 
         //toggle navBoxes visibility when one of them is opened
@@ -324,7 +324,10 @@
         }
 
         requestAnimationFrame(() => adjustBoxesArchive()); //first navBoxes adjustement, right after load
-        window.addEventListener('resize', () => { document.getElementById("langBox").removeAttribute("hidden"); adjustBoxesArchive(); });
+        window.addEventListener('resize', () => {
+            document.getElementById("langBox").removeAttribute("hidden");
+            adjustBoxesArchive();
+        });
     </script>
 </body>
 

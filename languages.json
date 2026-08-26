@@ -7,7 +7,6 @@
         "koncerty": "Koncerty & Bilety",
         "zdjecia": "Galeria",
         "zdjeciaTitle": "Galeria",
-        "proby": "Próby",
         "pomoc": "Wspomóż nas",
         "dolacz": "Dołącz do nas",
         "pomocBoxTitle": "Możesz nas wesprzeć wpłacając dowolną kwotę na konto:",
@@ -15,7 +14,6 @@
         "loremHead": "Polonia Cantante to pełen entuzjazmu polski chór amatorski z Leuven, który od 2019 roku spotyka się, aby dzielić się miłością do muzyki i radością wspólnego śpiewania. Nasz repertuar jest tak różnorodny, jak nasi członkowie.",
         "loremSub": "Zapraszamy na nasze koncerty!",
         "koncertTitle": "Koncerty sezon '26/'27",
-        "bilet": "> Bilety <",
         "archive": "Archiwum koncertów",
         "probyTitle": "Próby",
         "probyOpis": "Próby odbywają się w środy, jeśli chcesz dołączyć, kliknij przycisk i śmiało pisz do nas!",
@@ -42,7 +40,6 @@
         "koncerty": "Concerts & Tickets",
         "zdjecia": "Gallery",
         "zdjeciaTitle": "Gallery",
-        "proby": "Rehearsals",
         "pomoc": "Support us",
         "dolacz": "Join us",
         "pomocBoxTitle": "You can support us by donating any amount to the following account:",
@@ -50,7 +47,6 @@
         "loremHead": "Polonia Cantante is an enthusiastic Polish amateur choir from Leuven that has been meeting since 2019 to share a love of music and the joy of singing together. Our repertoire is as diverse as our members.",
         "loremSub": "Join us for our concerts!",
         "koncertTitle": "Concert season '26/'27",
-        "bilet": "> Tickets <",
         "archive": "Archive of concerts",
         "probyTitle": "Rehearsals",
         "probyOpis": "Rehearsals take place every Wednesday, if you want to join us, click the button and write to us!",
@@ -77,7 +73,6 @@
         "koncerty": "Concerts & Billets",
         "zdjecia": "Galerie",
         "zdjeciaTitle": "Galerie",
-        "proby": "Répétitions",
         "pomoc": "Soutien",
         "dolacz": "Adhérer",
         "pomocBoxTitle": "Vous pouvez nous soutenir en versant un montant de votre choix sur le compte suivant:",
@@ -85,7 +80,6 @@
         "loremHead": "Polonia Cantante est un chœur amateur polonais enthousiaste de Louvain qui se réunit depuis 2019 pour partager l’amour de la musique et la joie de chanter ensemble. Notre répertoire est aussi varié que nos membres.",
         "loremSub": "Nous vous invitons à nos concerts !",
         "koncertTitle": "Concerts saison '26/'27",
-        "bilet": "> Billets <",
         "archive": "Archive de concerts",
         "probyTitle": "Répétitions",
         "probyOpis": "Les répétitions ont lieu le mercredi. Si vous souhaitez participer, cliquez sur le bouton et n'hésitez pas à nous écrire!",
@@ -112,7 +106,6 @@
         "koncerty": "Concerten & Tickets",
         "zdjecia": "Galerij",
         "zdjeciaTitle": "Galerij",
-        "proby": "Repetities",
         "pomoc": "Steun ons",
         "dolacz": "Sluit je aan",
         "pomocBoxTitle": "U kunt ons steunen door een willekeurig bedrag over te maken naar de volgende rekening:",
@@ -120,7 +113,6 @@
         "loremHead": "Polonia Cantante is een enthousiast Pools amateurkoor uit Leuven dat sinds 2019 samenkomt om de liefde voor muziek en het plezier van samen zingen te delen. Ons repertoire is net zo divers als onze leden.",
         "loremSub": "Kom naar onze concerten!",
         "koncertTitle": "Concerten seizoen '26/'27",
-        "bilet": "> Tickets <",
         "archive": "Archief van concerten",
         "probyTitle": "Repetities",
         "probyOpis": "Repetities vinden plaats op woensdagen. Als je wilt meedoen, klik dan op de knop en stuur ons gerust een berichtje!",
@@ -149,5 +141,5 @@
             "eda"
         ]
     },
-    "v": "2.6b"
+    "v": "2.7"
 }

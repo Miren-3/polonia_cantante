@@ -1,4 +1,4 @@
-//if you see this, hey there! my discord is miren.3 or email me at urexstt@gmail.com if you want to contact me :)
+//if you see this, hey there! my discord is miren.3 or email me at urexstt@gmail.com if you want to contact me. ps my github is at the bottom :)
 const langs = ["PL", "EN", "NL", "FR"];
 const default_lang = "PL";
 let current_lang = langs.includes(default_lang) ? default_lang : "EN";
@@ -7,11 +7,12 @@ if (index !== -1) langs.splice(index, 1);
 let currentVConcerts, currentVLangs;
 let langChange = true;
 let first = true;
-//let fetched = false;
 let rmBoxHandler = null;
 let allowError = true;
+
 //checks to see if it fetched at dom before website reloaded
 if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage?.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+
 //check to see if lastFetchDate is available
 console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ? true : false}`);
 
@@ -27,10 +28,10 @@ console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ?
             await applyData(key === "key_langs" ? "languages" : "koncertyInfo", data, 'apply@loadKeys');
         } else {
             //if no cache it fetches the jsons and get saved to localStorage in applyData();
-            try {//fetched = true;
+            try {
                 const data = await fetchData(key === "key_langs" ? "languages" : "koncertyInfo", 'fetch@loadKeysFetch')
                 await applyData(key === "key_langs" ? "languages" : "koncertyInfo", data, 'apply@loadKeysFetch')
-            } catch (e) {//fetched = false;
+            } catch (e) {
                 console.warn("Mrn: loadKeys: fetch failed, using fallback (aka cache you stupid)", e);
             }
         }
@@ -98,7 +99,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     mainLi.appendChild(document.createElement('br'));
                     const spanPrices = document.createElement('span');
                     spanPrices.classList.add('prices');
-                    spanPrices.textContent = "€" + (info?.price || 10);
+                    spanPrices.textContent = "€ " + (info?.price.toLowerCase() === "gratis!" || info?.price.toLowerCase() === "gratis" || info?.price.toString() === "0" ? "0!" : info?.price) || "10";
                     mainLi.appendChild(spanPrices);
                     mainLi.appendChild(document.createElement('br'));
                     const spanTickets = document.createElement('span');
@@ -106,7 +107,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     const a = document.createElement('a');
                     a.classList.add('ticket');
                     a.textContent = JSON.parse(localStorage.getItem("key_langs"))[current_lang]["bilet"] || "Ticket";
-                    a.href = "https://poloniacantante.org/index.php/tickets" || "#";
+                    a.href = "https://poloniacantante.org/tickets" || "#";
                     a.target = "_blank";
                     spanTickets.appendChild(a);
                     mainLi.appendChild(spanTickets);
@@ -120,7 +121,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
 
                 ol.appendChild(mainLi);
                 const img = document.createElement('img');
-                img.src = info?.src || "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced.jpg";
+                img.src = info?.src || "https://poloniacantante.org/kartaenhanced";
                 li.appendChild(img);
                 ol.appendChild(li);
                 mainBox.appendChild(ol);
@@ -234,12 +235,10 @@ function showErrorDiv(info) {
 setTimeout(() => {
     document.querySelectorAll("#boxGrupy li img").forEach(img => {
         img.parentElement.setAttribute("id", img.alt.toLowerCase().trim());
-        img.onerror = function () {
-            if (!this.src.includes("default.jpg")) this.src = "https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg";
-        };
+        img.onerror = () => this.src = "https://poloniacantante.org/default";
 
         // if its already broken
-        if (img.complete && img.naturalWidth === 0) img.src = "https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg";
+        if (img.complete && img.naturalWidth === 0) img.src = "https://poloniacantante.org/default";
     });
 }, 2000);
 
@@ -305,13 +304,13 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
     dataPassed["add"].forEach(name => {
         //if you get an error on line below, its most likely because of name isnt complete or languages json if fucked up
         const target = document.getElementById(name.split("_")[1]);
-        if (!target || target.contains(document.querySelector(`li img[alt='${name.split("_")[0]}']`))) return;
+        if (!target || target.contains(document.querySelector(`li img[alt='${name.split("_")[0].toLowerCase()}']`))) return;
         console.log(`Mrn: for debugging: adding: ${name}`);
         const li = document.createElement("li");
         const img = document.createElement("img");
-        img.setAttribute("alt", name.split("_")[0]);
-        img.onerror = function () { this.src = 'https://poloniacantante.org/wp-content/uploads/2026/02/default.jpg'; }; //if no image found in files
-        img.src = `https://poloniacantante.org/wp-content/uploads/2026/03/${name.split("_")[0].trim()}.png`;
+        img.setAttribute("alt", name.split("_")[0].toLowerCase());
+        img.onerror = () => this.src = 'https://poloniacantante.org/default'; //if no image found in files
+        img.src = `https://poloniacantante.org/${name.split("_")[0].trim().toLowerCase()}`;
         img.setAttribute("loading", "lazy");
         li.appendChild(img);
         const p = document.createElement("p");
@@ -319,10 +318,9 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         const h2 = document.createElement("h2");
         h2.innerHTML = name.split("_")[0];
         li.appendChild(h2);
-        const targetOl = document.getElementById(name.split("_")[1]);
-        if (!targetOl) return;
-        targetOl.querySelector("ol").appendChild(li);
+        target.querySelector("ol").appendChild(li);
     });
+
     console.log("finished editing grupy");
 }
 
@@ -335,7 +333,7 @@ async function manualFetchCall() {//check this
     try {
         await applyData("languages", null, 'htmlCall');
         await applyData("koncertyInfo", null, 'htmlCall');
-        buttonA.textContent = "✔️";
+        buttonA.textContent = "✔️...";
         setTimeout(() => location.reload(), 2000);
     } catch (e) {
         buttonA.textContent = "❌";
@@ -350,7 +348,11 @@ function scrollToId(id) {
 
 //pretty self-explanatory
 let resizeRAF;
-window.addEventListener('resize', () => { toggleBox("all"); cancelAnimationFrame(resizeRAF); resizeRAF = requestAnimationFrame(() => adjustBoxes()); });
+window.addEventListener('resize', () => {
+    toggleBox("all");
+    cancelAnimationFrame(resizeRAF);
+    resizeRAF = requestAnimationFrame(() => adjustBoxes());
+});
 
 document.addEventListener("scroll", () => {
     if (rmBoxHandler) {
@@ -369,7 +371,7 @@ document.addEventListener("scroll", () => {
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
     //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
-    if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (24 * 1000 * 60 * 60)) {
+    if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (36 * 1000 * 60 * 60)) {
         await applyData("languages", null, "fetch@dom");
         await applyData("koncertyInfo", null, "fetch@dom");
         try { localStorage?.setItem("fetchedLastTime", true); } catch (e) {/*nothing lol*/ };
@@ -382,10 +384,10 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
     document.querySelectorAll("img").forEach(img => {
         img.addEventListener('click', () => {
             const imgDiv = document.createElement('div');
-            imgDiv.style = 'position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;transition-timing-function: ease-out;transition: opacity 0.7s;';
+            imgDiv.style = 'position:fixed;inset:0;display:flex;justify-content:center;align-items:center;z-index:1000;opacity:0;transition-timing-function:ease-out;transition: opacity 0.7s;';
             imgDiv.id = "imgFullScreen";
             const innerDiv = document.createElement('div');
-            innerDiv.style = "background-color: rgba(46, 84, 234, 0.95);max-width: 100%; max-height: 100%; width: 90%; height: auto;display: flex; justify-content: center; align-items: center;padding: 25px;position:relative;box-sizing: border-box;overflow:hidden;margin-top: 10px;border-radius: 15px;";
+            innerDiv.style = "background-color:rgba(46, 84, 234, 0.95);max-width:100%;max-height:100%;width:90%;height:auto;display:flex;justify-content:center;align-items:center;padding:25px;position:relative;box-sizing:border-box;overflow:hidden;margin-top:10px;border-radius:15px;";
             const closeBtn = document.createElement('button');
             closeBtn.textContent = "X"
             closeBtn.style = "position:absolute;top:15px;right:15px;left:auto;background-color:white;height:50px;width:50px;border: 2px solid black;border-radius:5px;font-size:2.8rem;cursor:pointer;z-index:1001;padding: 0 0 10px 0;margin:0;";
@@ -393,7 +395,7 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
             innerDiv.appendChild(closeBtn);
             const imgEl = document.createElement('img');
             imgEl.src = img.src;
-            imgEl.style = "max-width: 92vw; max-height: 90vh; min-width: clamp(300px,70vw,900px);min-height: clamp(300px,70vh,900px);height:auto; width:auto;object-fit: contain;box-sizing: border-box;border: 2px solid white";
+            imgEl.style = "max-width:92vw;max-height:90vh;min-width:clamp(300px,70vw,900px);min-height:clamp(300px,70vh,900px);height:auto;width:auto;object-fit:contain;box-sizing:border-box;border: 2px solid white";
             innerDiv.appendChild(imgEl);
             imgDiv.appendChild(innerDiv);
             document.body.appendChild(imgDiv);

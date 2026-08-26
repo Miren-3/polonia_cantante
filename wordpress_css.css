@@ -101,7 +101,7 @@ header {
     z-index: 2;
     overflow: hidden;
     position: fixed;
-    top: 4px;
+    top: 3px;
     left: 10px;
     transform-origin: top left;
 }
@@ -250,7 +250,7 @@ header {
     color: white;
     -webkit-text-stroke: 1.5px black;
     /*backdrop-filter: blur(3px);*/
-    top: 2px;
+    top: 10px;
 }
 
 .swiper {

@@ -5,7 +5,7 @@
             "time": "??:??",
             "adress": "Leuven",
             "price": "Gratis!",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced-scaled.jpg",
+            "src": "https://poloniacantante.org/kartaenhanced",
             "ended": false
         },
         {
@@ -13,7 +13,7 @@
             "time": "??:??",
             "adress": "Blanden, Haasrodestraat 72",
             "price": "12",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced-scaled.jpg",
+            "src": "https://poloniacantante.org/kartaenhanced",
             "ended": false
         },
         {
@@ -21,7 +21,7 @@
             "time": "??:??",
             "adress": "??",
             "price": "Gratis!",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced-scaled.jpg",
+            "src": "https://poloniacantante.org/kartaenhanced",
             "ended": false
         },
         {
@@ -29,9 +29,9 @@
             "time": "??:??",
             "adress": "Blanden",
             "price": "10",
-            "src": "https://poloniacantante.org/wp-content/uploads/2026/02/kartaEnhanced-scaled.jpg",
+            "src": "https://poloniacantante.org/kartaenhanced",
             "ended": false
         }
     ],
-    "v": "1.5b"
+    "v": "1.6"
 }
