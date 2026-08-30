@@ -11,7 +11,9 @@ let rmBoxHandler = null;
 let allowError = true;
 
 //checks to see if it fetched at dom before website reloaded
-if (localStorage?.getItem("fetchedLastTime") === "true") { console.warn("fetched@dom"); try { localStorage?.setItem("fetchedLastTime", false) } catch (e) { console.error("idk error" + e) } } else console.info("no fetched@dom;");
+if (localStorage?.getItem("fetchedLastTime") === "true") {
+    try { console.warn("fetched@dom"); localStorage?.setItem("fetchedLastTime", false); } catch (e) { console.error("idk error" + e); }
+} else console.info("no fetched@dom;");
 
 //check to see if lastFetchDate is available
 console.info(`lastFetchDate available: ${localStorage.getItem("lastFetchDate") ? true : false}`);
@@ -154,6 +156,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
 
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").textContent = dataLang.concertEndedText);
             if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 141);
+
             try { localStorage?.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
             currentVLangs = data["v"];
         }
@@ -170,7 +173,7 @@ function changeLang(lang) {
     adjustBoxes();
 }
 
-function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because it depends on window width 
+function adjustBoxes() {//there are a lot of stuff mixed in here, mainly because it depends on window width
     for (let helpBox of ["langBox", "contactInfoBox", "pomocBox"]) {
         const box = document.getElementById(helpBox);
         const buttonPos = helpBox === 'langBox' ? document.getElementById("lang").getBoundingClientRect() : (helpBox === "contactInfoBox" ? document.getElementById("dolacz").getBoundingClientRect() : document.getElementById("pomoc").getBoundingClientRect());
@@ -235,7 +238,7 @@ function showErrorDiv(info) {
 setTimeout(() => {
     document.querySelectorAll("#boxGrupy li img").forEach(img => {
         img.parentElement.setAttribute("id", img.alt.toLowerCase().trim());
-        img.onerror = () => this.src = "https://poloniacantante.org/default";
+        img.onerror = () => img.src = "https://poloniacantante.org/default";
 
         // if its already broken
         if (img.complete && img.naturalWidth === 0) img.src = "https://poloniacantante.org/default";
@@ -334,10 +337,11 @@ async function manualFetchCall() {//check this
         await applyData("languages", null, 'htmlCall');
         await applyData("koncertyInfo", null, 'htmlCall');
         buttonA.textContent = "✔️...";
-        setTimeout(() => location.reload(), 2000);
     } catch (e) {
         buttonA.textContent = "❌";
         console.error("Mrn: manualFetchCall: fetch failed", e);
+    } finally {
+        location.reload();
     }
 }
 
@@ -370,12 +374,12 @@ document.addEventListener("scroll", () => {
 
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
-    //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (24 * 1000 * 60 * 60)
+
+    //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (36 * 1000 * 60 * 60)
     if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (36 * 1000 * 60 * 60)) {
         await applyData("languages", null, "fetch@dom");
         await applyData("koncertyInfo", null, "fetch@dom");
-        try { localStorage?.setItem("fetchedLastTime", true); } catch (e) {/*nothing lol*/ };
-        location.reload();
+        try { localStorage?.setItem("fetchedLastTime", true); } catch (e) {/*nothing lol*/ } finally { location.reload(); }
     }
 
     requestAnimationFrame(() => adjustBoxes()); //again lol, because the langBox is somehow acting weird
@@ -389,7 +393,7 @@ document.addEventListener('DOMContentLoaded', async () => {//fetches again on lo
             const innerDiv = document.createElement('div');
             innerDiv.style = "background-color:rgba(46, 84, 234, 0.95);max-width:100%;max-height:100%;width:90%;height:auto;display:flex;justify-content:center;align-items:center;padding:25px;position:relative;box-sizing:border-box;overflow:hidden;margin-top:10px;border-radius:15px;";
             const closeBtn = document.createElement('button');
-            closeBtn.textContent = "X"
+            closeBtn.textContent = "X";
             closeBtn.style = "position:absolute;top:15px;right:15px;left:auto;background-color:white;height:50px;width:50px;border: 2px solid black;border-radius:5px;font-size:2.8rem;cursor:pointer;z-index:1001;padding: 0 0 10px 0;margin:0;";
             closeBtn.onclick = () => document.body.removeChild(document.getElementById("imgFullScreen"));
             innerDiv.appendChild(closeBtn);
