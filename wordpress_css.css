@@ -641,11 +641,6 @@ li a {
     gap: 40px;
 }
 
-#jowi img,
-#darek img {
-    transform: scaleX(1.1);
-}
-
 #dolaczSeperateGrupy {
     font-size: clamp(1.4rem, 1.7vw, 1.8rem);
     border: 2px black solid;

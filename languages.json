@@ -94,7 +94,7 @@
         "doGory": "Retour en haut",
         "errorReport": "Y-a-t-il une erreur? Signalez-la ici!",
         "autor": "Site et traductions créés par Bernard K-K",
-        "github": ">Le site a le source ouverte sur: github.com/Miren-3",
+        "github": "Le site a le source ouverte sur: github.com/Miren-3",
         "manualFetch": "Voulez-vous vérifier si les informations sur le site sont à jour?",
         "concertEndedText": "Oups, c'est fini! À la prochaine!"
     },
@@ -141,5 +141,5 @@
             "eda"
         ]
     },
-    "v": "2.7"
+    "v": "2.7b"
 }
