@@ -133,15 +133,14 @@
     },
     "ppl": {
         "add": [
-            "Paulina_alt", "Bernard_tenor"
+            "Bernard_tenor"
         ],
         "rm": [
             "DJ",
             "marta",
             "eda",
-            "ola",
-            "paulina"
+            "ola"
         ]
     },
-    "v": "2.8"
+    "v": "2.8b"
 }
