@@ -5,7 +5,7 @@
             "time": "13:30 & 15:00",
             "adress": "Leuven",
             "price": "Gratis!",
-            "src": "https://poloniacantante.org/plakat",
+            "src": "https://poloniacantante.org/plakatsq",
             "ended": false
         },
         {
@@ -33,5 +33,5 @@
             "ended": false
         }
     ],
-    "v": "1.6b"
+    "v": "1.7"
 }
