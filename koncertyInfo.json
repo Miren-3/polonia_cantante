@@ -2,10 +2,10 @@
     "concerts": [
         {
             "date": "27-9-2026",
-            "time": "??:??",
+            "time": "13:30 & 15:00",
             "adress": "Leuven",
             "price": "Gratis!",
-            "src": "https://poloniacantante.org/kartaenhanced",
+            "src": "https://poloniacantante.org/plakat",
             "ended": false
         },
         {
@@ -33,5 +33,5 @@
             "ended": false
         }
     ],
-    "v": "1.6"
+    "v": "1.6b"
 }
