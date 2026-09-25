@@ -102,12 +102,12 @@ header {
     overflow: hidden;
     position: fixed;
     top: 3px;
-    left: 10px;
+    left: 0px;
     transform-origin: top left;
 }
 
 .logo img {
-    width: 50px;
+    width: 80px;
     /* konkretna wartość */
     height: auto;
     display: block;
@@ -758,7 +758,6 @@ footer button {
 }
 
 @media (max-width: 1200px) {
-
     #loremHead,
     #loremSub {
         line-height: 29px;
@@ -766,15 +765,15 @@ footer button {
 
     .logo {
         top: 8px;
-        left: 10px;
+        left: 1px;
     }
 
     .logo img {
-        width: 45px;
+        width: 70px;
     }
 
     #polCant {
-        left: 65px;
+        left: 80px;
         font-size: 1.9rem;
         top: 8px;
     }
@@ -856,16 +855,15 @@ footer button {
 
 @media (max-width: 768px) {
     .logo {
-        top: 5px;
-        left: 6px;
+        top: 10px;
+        left: 10px;
     }
 
     .logo img {
-        width: 40px;
+        width: 55px;
     }
 
     #polCant {
-        left: 60px;
         font-size: 1.8em;
         top: 5px;
     }
@@ -959,18 +957,17 @@ footer button {
     }
 
     .logo {
-        top: 5px;
+        top: 10px;
         left: 5px;
     }
 
     .logo img {
-        width: 37px;
+        width: 50px;
     }
 
     #polCant {
-        left: 50px;
+        left: 60px;
         font-size: 1.7rem;
-        top: 4px;
     }
 
     #welcome {

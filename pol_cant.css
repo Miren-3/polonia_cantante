@@ -102,12 +102,12 @@ header {
     overflow: hidden;
     position: fixed;
     top: 1px;
-    left: 10px;
+    left: 1px;
     transform-origin: top left;
 }
 
 .logo img {
-    width: 45px;
+    width: 77px;
     /* konkretna wartość */
     height: auto;
     display: block;
@@ -758,25 +758,24 @@ footer button {
 }
 
 @media (max-width: 1200px) {
-
     #loremHead,
     #loremSub {
         line-height: 29px;
     }
 
     .logo {
-        top: 8px;
-        left: 10px;
+        top: 5px;
+        left: 1px;
     }
 
     .logo img {
-        width: 45px;
+        width: 70px;
     }
 
     #polCant {
-        left: 65px;
+        left: 70px;
         font-size: 1.9rem;
-        top: 8px;
+        top: 0px;
     }
 }
 
@@ -815,7 +814,7 @@ footer button {
     }
 
     #polCant {
-        top: 8px;
+        top: -10px;
         -webkit-text-stroke: 0px;
     }
 
@@ -860,13 +859,13 @@ footer button {
     }
 
     .logo img {
-        width: 40px;
+        width: 60px;
     }
 
     #polCant {
-        left: 60px;
+        left: 70px;
         font-size: 1.8em;
-        top: 5px;
+        top: -5px;
     }
 
     .box {
@@ -963,13 +962,12 @@ footer button {
     }
 
     .logo img {
-        width: 37px;
+        width: 50px;
     }
 
     #polCant {
-        left: 50px;
+        left: 60px;
         font-size: 1.7rem;
-        top: 4px;
     }
 
     #welcome {

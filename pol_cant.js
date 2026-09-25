@@ -103,16 +103,20 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     spanPrices.classList.add('prices');
                     spanPrices.textContent = "€ " + (info?.price.toLowerCase() === "gratis!" || info?.price.toLowerCase() === "gratis" || info?.price.toString() === "0" ? "0!" : info?.price) || "10";
                     mainLi.appendChild(spanPrices);
-                    mainLi.appendChild(document.createElement('br'));
-                    const spanTickets = document.createElement('span');
-                    spanTickets.classList.add('buttons');
-                    const a = document.createElement('a');
-                    a.classList.add('ticket');
-                    a.textContent = JSON.parse(localStorage.getItem("key_langs"))[current_lang]["bilet"] || "Ticket";
-                    a.href = "https://poloniacantante.org/tickets" || "#";
-                    a.target = "_blank";
-                    spanTickets.appendChild(a);
-                    mainLi.appendChild(spanTickets);
+                    
+                    if (!(info?.price.toLowerCase() === "gratis!" || info?.price.toLowerCase() === "gratis" || info?.price.toString() === "0")) {
+                        mainLi.appendChild(document.createElement('br'));
+                        const spanTickets = document.createElement('span');
+                        spanTickets.classList.add('buttons');
+                        const a = document.createElement('a');
+                        a.classList.add('ticket');
+                        a.textContent = JSON.parse(localStorage.getItem("key_langs"))[current_lang]["bilet"] || "Ticket";
+                        a.href = "https://poloniacantante.org/tickets" || "#";
+                        a.target = "_blank";
+                        spanTickets.appendChild(a);
+                        mainLi.appendChild(spanTickets);
+                    }
+
                     mainLi.appendChild(document.createElement('br'));
                 } else {
                     spanTimes.textContent = "🕓 " + (JSON.parse(localStorage.getItem("key_langs"))[current_lang]["concertEndedText"] || "Ended");
