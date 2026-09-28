@@ -41,12 +41,12 @@
         #return {
             position: absolute;
             top: 20px;
-            left: 80px;
+            left: 100px;
             color: white;
             text-decoration: none;
             border: solid white 2px;
             border-radius: 6px;
-            font-size: clamp(1.1rem, 2vw, 1.9rem);
+            font-size: clamp(1.1rem, 1.9vw, 1.9rem);
             background-color: transparent;
             cursor: pointer;
             padding: 0 5px;
@@ -166,7 +166,7 @@
 
 <body style="background-color:rgb(34, 45, 90);">
     <div class="logo">
-        <img src='https://poloniacantante.org/logopctrans'>
+        <img src='https://poloniacantante.org/newlogo/cropped-newlogo-png'>
     </div>
     <h1 id="archiveh1">Archive of concerts</h1>
     <a id="return" href="Polonia_Cantante.html">← Polonia Cantante</a>
@@ -225,13 +225,24 @@
                 <img src="" alt="Whoops!">
             </div>
         </section>
+        <hr>
+        <section class="concert">
+            <h1 class="date"></h1>
+            <div class="wrap">
+                <img src="" alt="Whoops!">
+            </div>
+        </section>
     </main>
 
     <script>
         const dataArchive = {
             "concerts": [
                 {
-                    "date": "6/2025",
+                    "date": "9/2026",
+                    "img": "https://poloniacantante.org/plakatsq"
+                },
+                {
+                    "date": "6/2026",
                     "img": "https://poloniacantante.org/polonia-cantante-13-06-2026/"
                 },
                 {
@@ -284,7 +295,7 @@
             }
             applyDataArchive();
         }
-        
+
         languageArchive("PL");
 
         //toggle navBoxes visibility when one of them is opened

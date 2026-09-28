@@ -6,7 +6,7 @@
             "adress": "Leuven",
             "price": "Gratis!",
             "src": "https://poloniacantante.org/plakatsq",
-            "ended": false
+            "ended": true
         },
         {
             "date": "12-12-2026",
@@ -33,5 +33,5 @@
             "ended": false
         }
     ],
-    "v": "1.7"
+    "v": "1.7b"
 }
