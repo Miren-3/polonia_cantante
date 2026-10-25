@@ -312,13 +312,13 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
     dataPassed["add"].forEach(name => {
         //if you get an error on line below, its most likely because of name isnt complete or languages json if fucked up
         const target = document.getElementById(name.split("_")[1]);
-        if (!target || target.contains(document.querySelector(`li img[alt='${name.split("_")[0].toLowerCase()}']`))) return;
+        if (!target/* || target.contains(document.querySelector(`li img[alt='${name.split("_")[0].toLowerCase()}']`))*/) return;
         console.log(`Mrn: for debugging: adding: ${name}`);
         const li = document.createElement("li");
         const img = document.createElement("img");
         img.setAttribute("alt", name.split("_")[0].toLowerCase());
         img.onerror = () => this.src = 'https://poloniacantante.org/default'; //if no image found in files
-        img.src = `https://poloniacantante.org/${name.split("_")[0].trim().toLowerCase() + (allNames.includes(name.split("_")[0].trim().toLowerCase()) ? "_second" : "")}`;
+        img.src = `https://poloniacantante.org/${name.split("_")[0].trim().toLowerCase() + allNames.includes(name.split("_")[0].trim().toLowerCase()) ? "_second" : ""}`;
         img.setAttribute("loading", "lazy");
         li.appendChild(img);
         const p = document.createElement("p");
