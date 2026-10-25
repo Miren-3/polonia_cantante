@@ -133,9 +133,9 @@
     },
     "ppl": {
         "add": [
-            "Ela_tenor",
-            "Ania_tenor",
-            "Monika_alt"
+            "Ela _tenor",
+            "Ania _tenor",
+            "Monika _alt"
         ],
         "rm": [
             "DJ",
@@ -145,5 +145,5 @@
             "bernard"
         ]
     },
-    "v": "2.9b"
+    "v": "3.0"
 }
