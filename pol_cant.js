@@ -103,7 +103,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
                     spanPrices.classList.add('prices');
                     spanPrices.textContent = "€ " + (info?.price.toLowerCase() === "gratis!" || info?.price.toLowerCase() === "gratis" || info?.price.toString() === "0" ? "0!" : info?.price) || "10";
                     mainLi.appendChild(spanPrices);
-                    
+
                     if (!(info?.price.toLowerCase() === "gratis!" || info?.price.toLowerCase() === "gratis" || info?.price.toString() === "0")) {
                         mainLi.appendChild(document.createElement('br'));
                         const spanTickets = document.createElement('span');
@@ -303,6 +303,7 @@ function toggleBox(id) {
 function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
     console.log("editing grupy...", from);
     const grupyBox = document.getElementById("boxGrupy");
+    const allNames = [...document.querySelectorAll("#boxGrupy section ol li")].map(el => el.id);
     dataPassed["rm"].forEach(name => {
         const li = grupyBox.querySelector(`li img[alt='${name.toLowerCase()}']`);
         if (li) li.parentElement.remove();
@@ -317,7 +318,7 @@ function editGrupy(dataPassed, from) {//adds / removes people from grupyBox
         const img = document.createElement("img");
         img.setAttribute("alt", name.split("_")[0].toLowerCase());
         img.onerror = () => this.src = 'https://poloniacantante.org/default'; //if no image found in files
-        img.src = `https://poloniacantante.org/${name.split("_")[0].trim().toLowerCase()}`;
+        img.src = `https://poloniacantante.org/${name.split("_")[0].trim().toLowerCase() + (allNames.includes(name.split("_")[0].trim().toLowerCase()) ? "_second" : "")}`;
         img.setAttribute("loading", "lazy");
         li.appendChild(img);
         const p = document.createElement("p");
