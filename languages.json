@@ -132,15 +132,14 @@
         "concertEndedText": "Oei, het is gedaan! Tot de volgende keer!"
     },
     "ppl": {
-        "add": [
-            "Bernard_tenor"
-        ],
+        "add": [],
         "rm": [
             "DJ",
             "marta",
             "eda",
-            "ola"
+            "ola",
+            "bernard"
         ]
     },
-    "v": "2.8b"
+    "v": "2.9"
 }
