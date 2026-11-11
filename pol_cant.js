@@ -1,4 +1,3 @@
-//if you see this, hey there! my discord is miren.3 or email me at urexstt@gmail.com if you want to contact me. ps my github is at the bottom :)
 const langs = ["PL", "EN", "NL", "FR"];
 const default_lang = "PL";
 let current_lang = langs.includes(default_lang) ? default_lang : "EN";
@@ -52,7 +51,7 @@ async function fetchData(type, from) {//fetch jsons? lol
         }
 
         try { localStorage?.setItem("lastFetchDate", JSON.stringify(Date.now())); } catch (e) { console.error(e); }
-        console.info(`finished fetching ${type}`, from); //kind of misleading but who cares really?
+        console.info(`finished fetching ${type}`, from); //kind of misleading but who really cares?
         return await fetched.json();
 
     } catch (err) {
@@ -139,7 +138,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
             currentVConcerts = data["v"];
         }
 
-        try { localStorage?.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") };
+        try { localStorage?.setItem("key_concerts", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage error") };
 
     } else if (type === "languages") {
         let data = dataPassed || await fetchData(type, from);
@@ -161,7 +160,7 @@ async function applyData(type, dataPassed, from) {//applies the jsons, duhhh
             document.querySelectorAll(`.concert[ended]`).forEach(i => i.querySelector(".times").textContent = dataLang.concertEndedText);
             if (data["ppl"]?.add.length !== 0 || data["ppl"]?.rm.length !== 0) editGrupy(data["ppl"], 141);
 
-            try { localStorage?.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage disabled") }
+            try { localStorage?.setItem("key_langs", JSON.stringify(data)); /*updates cache*/ } catch (e) { console.error("localStorage error") }
             currentVLangs = data["v"];
         }
 
@@ -380,7 +379,7 @@ document.addEventListener("scroll", () => {
 document.addEventListener('DOMContentLoaded', async () => {//fetches again on load w if statements
     requestAnimationFrame(() => adjustBoxes()); //first navBoxes adjustement, right after load
 
-    //if last fetch date is more than 24 hours ago (nobody knows why its 24), it fetches again (36 * 1000 * 60 * 60)
+    //if last fetch date is more than 36 hours ago (nobody knows why its 36), it fetches again (36 * 1000 * 60 * 60)
     if (Date.now() - Number(localStorage.getItem("lastFetchDate") || 0) >= (36 * 1000 * 60 * 60)) {
         await applyData("languages", null, "fetch@dom");
         await applyData("koncertyInfo", null, "fetch@dom");

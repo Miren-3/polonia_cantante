@@ -1,10 +1,7 @@
-/* *adds a very realistic copyright restriction here* */
-
 :root {
     --swiper-navigation-top-offset: 45%;
     --swiper-navigation-sides-offset: 40px;
     --swiper-navigation-color: blue;
-    --galeria-caption-h: 1.8rem;
 }
 
 * {
@@ -108,7 +105,6 @@ header {
 
 .logo img {
     width: 77px;
-    /* konkretna wartość */
     height: auto;
     display: block;
 }
@@ -394,7 +390,6 @@ header {
     justify-content: center;
     align-items: center;
     width: 100%;
-    /* 100 dla poziom i mami v, 95 dla pion*/
     margin: 2vh 0;
 }
 
@@ -425,9 +420,7 @@ header {
     margin-top: 20px;
     margin-inline: auto;
     width: 80%;
-    /*mami v 80%, pion 50%;*/
     max-height: 350px;
-    /*mami v 85%, pion 50%;*/
     object-fit: contain;
     object-position: center;
     display: block;
@@ -486,8 +479,8 @@ li a {
 }
 
 .swiper-pics .img-wrap {
-    height: calc(45vh - var(--galeria-caption-h) - 5px);
-    max-height: calc(45vh - var(--galeria-caption-h) - 5px);
+    height: calc(45vh - 1.8rem - 5px);
+    max-height: calc(45vh - 1.8rem - 5px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -503,8 +496,8 @@ li a {
 }
 
 .swiper-pics h2 {
-    height: var(--galeria-caption-h);
-    line-height: var(--galeria-caption-h);
+    height: 1.8rem;
+    line-height: 1.8rem;
     margin: 0;
     font-size: clamp(1rem, 1.5vw, 1.6rem);
     flex-shrink: 0;

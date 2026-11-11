@@ -27,7 +27,6 @@
 
         .logo img {
             width: 50px;
-            /* konkretna wartość */
             height: auto;
             display: block;
         }
@@ -267,9 +266,9 @@
         const concertArchive = document.querySelectorAll(".concert");
         function applyDataArchive() {
             dataArchive.concerts.forEach((info, i) => {
-                //you know what to do here, make divs seperately
                 const section = concertArchive[i];
                 if (!section) return;
+
                 section.querySelector(".date").textContent = "📅 " + info?.date;
                 if (info.img !== undefined) section.querySelector("img").src = info.img;
                 if (info.vidSrc !== undefined) {
@@ -293,6 +292,7 @@
                 case "FR": h1.innerHTML = "Bienvenue dans l’archive de nos concerts!<br>Ici, vous trouverez tous nos concerts passés."; break;
                 default: h1.innerHTML = "Welcome to the concerts archive!<br>Here you will find all of our previous concerts.";
             }
+            
             applyDataArchive();
         }
 
