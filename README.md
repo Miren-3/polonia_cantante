@@ -1,1 +1,1 @@
-Repo which contains the*, now past, *code for the website poloniacantante.org
+Repo which contains the, now past, code for the website poloniacantante.org
